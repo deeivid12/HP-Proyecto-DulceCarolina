@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+.columna{
+	font-weight: bold;
+}
+
+.fondo-rosa{
+	background-color: pink;
+}
+
+.btn-crear{
+	background-color: #FF69B4;
+	border-color: #E21F60;
+	border-style: solid;
+	border-width: 1.5px;
+	color: white;
+	font-weight: bold;
+}

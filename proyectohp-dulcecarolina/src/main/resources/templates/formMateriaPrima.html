@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light fondo-rosa">
+		<a class="navbar-brand" href="#">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="about"
+					th:href="@{/listarMateriasPrima}">Materias Prima<span
+						class="sr-only">(current)</span></a></li>
+
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<p></p>
+		<h2 th:text="${titulo}"></h2>
+		<p></p>
+
+		<form th:action="@{/formMateriaPrima}" th:object="${mPrima}" method="post">
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label">Nombre</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{nom}" class="form-control" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></small> 
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label">Marca</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{marca}" class="form-control" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label">Unidad medida</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{uniMed}" class="form-control" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('uniMed')}" th:errors="*{uniMed}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label">Calorias/Unidad medida</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{calUniMed}" class="form-control" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('calUniMed')}" th:errors="*{calUniMed}"></small> 
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label">Hidratos de carbono/Unidad medida</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{hdcUniMed}" class="form-control" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('hdcUniMed')}" th:errors="*{hdcUniMed}"></small> 
+				</div>
+			</div>	
+				<div class="form-group row">
+					<label class="col-sm-1 col-form-label">Fibras/Unidad medida</label>
+					<div class="col-sm-4">
+						<input type="text" th:field="*{fibUniMed}" class="form-control" />
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fibUniMed')}" th:errors="*{fibUniMed}"></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-5 text-center">
+						<input type="submit" value="Crear Materia Prima"
+							class="btn btn-crear" />
+					</div>
+				</div>
+
+				<!-- Como id es un campo que lo genera el sistema, debe ser hidden -->
+				<input type="hidden" th:field="*{id}" />
+		</form>
+	</div>
+</body>
+</html>

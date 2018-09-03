@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<meta charset="UTF-8" />
+		<title th:text="${titulo}">Insert title here</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/css/estilos.css}"></link> 
+	</head>
+<body>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<input type="button" onclick="location.href='formMateriaPrima.html';" value="Agregar nueva Materia Prima" />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="columna">Id</th>
+					<th class="columna">Nombre</th>
+					<th class="columna">Marca</th>
+					<th class="columna">Unidad Medida</th>
+					<th class="columna">Calorias/Unidad Medida</th>
+					<th class="columna">Hidratos de carbono/Unidad Medida</th>
+					<th class="columna">Fibras/Unidad Medida</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="mp: ${mPrimas}">        <!-- Usamos th para iterar. {mPrimas} es el nombre del atributo 
+				pasado en la clase controladora, en la linea: model.addAttribute("mPrimas", clienteDao.findAll()); -->
+					<td th:text="${mp.id}"></td>      <!-- "mPrima" es el objeto del for -->
+					<td th:text="${mp.nom}"></td>     <!-- Tdos estos mPrima.ALGO llaman a los get correspondientes de la entidad mPrima -->
+					<td th:text="${mp.marca}"></td>
+					<td th:text="${mp.uniMed}"></td>
+					<td th:text="${mp.calUniMed}"></td>
+					<td th:text="${mp.hdcUniMed}"></td>
+					<td th:text="${mp.fibUniMed}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<!-- <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />  -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light fondo-rosa">
+	  <a class="navbar-brand" href="#">Inicio</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item active">
+	        <a class="nav-link" href="about" th:href="@{/listarClientes}">Clientes<span class="sr-only">(current)</span></a>
+	      </li>
+	      
+	    </ul>
+	  </div>
+	</nav>
+	<div class="container">
+	<p></p>
+
+
+	<h2 th:text="${titulo}"></h2>
+	<p></p>
+	
+	<form th:action="@{/formProducto}" th:object="${producto}" method="post">
+		
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Tipo</label>
+			<div class="col-sm-4">
+				<input type="text" th:field="*{tipo}" class="form-control"/>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></small>
+			</div>
+		</div>
+				
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Nombre</label>
+			<div class="col-sm-4">
+				<input type="text" th:field="*{nom}" class="form-control"/>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></small>
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Descripción</label>
+			<div class="col-sm-4">
+				<input type="text" th:field="*{dsc}" class="form-control"/>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('dsc')}" th:errors="*{dsc}"></small>
+			</div>
+		</div>		
+
+		<div class="form-group row">
+			<label class="col-sm-1 col-form-label">Cantidad de Porciones</label>
+			<div class="col-sm-4">
+				<input type="text" th:field="*{canPor}" class="form-control"/>
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('canPor')}" th:errors="*{canPor}"></small>
+			</div>
+		</div>					
+			
+		<div class="form-group row">
+			<div class="col-sm-5 text-center">
+				<input type="submit" value="Crear producto" class="btn btn-crear" />
+			</div>
+		</div>
+			
+		<input type="hidden" th:field="*{id}" />
+	</form>
+</div>
+</body>
+</html>

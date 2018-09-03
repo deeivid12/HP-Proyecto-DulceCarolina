@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="${titulo}">Insert title here</title>
+<!-- <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>  -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+	<h1 th:text="${titulo}"></h1>
+	<input type="button" onclick="location.href='formProducto.html';" value="Agregar nuevo producto" />
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>tipo</th>
+				<th>nombre</th>
+				<th>descripción</th>
+				<th>cantidad de porciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr  th:each="producto: ${productos}">
+				<td th:text="${producto.id}"></td> <!-- llama al metodo get -->
+				<td th:text="${producto.tipo}"></td>
+				<td th:text="${producto.nom}"></td>
+				<td th:text="${producto.dsc}"></td>
+				<td th:text="${producto.canPor}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</body>
+</html>

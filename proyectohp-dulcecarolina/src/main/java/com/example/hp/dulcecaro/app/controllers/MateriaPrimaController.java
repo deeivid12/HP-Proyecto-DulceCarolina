@@ -1,18 +1,24 @@
 package com.example.hp.dulcecaro.app.controllers;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.hp.dulcecaro.app.models.dao.IMateriaPrimaDao;
 import com.example.hp.dulcecaro.app.models.entity.MateriaPrima;
 
 @Controller
+@SessionAttributes("mPrima") //cada vez que se ejecuta Crear o Editar (peticion get), guarda la mPrima en la sesion y la pasa a la vista
 public class MateriaPrimaController {
 	
 	@Autowired
@@ -38,8 +44,25 @@ public class MateriaPrimaController {
 		return "formMateriaPrima"; // nombre de la vista
 	} 
 	
+	@RequestMapping(value="/formMateriaPrima/{id}")
+	public String editar(@PathVariable(value="id") Long id, Map<String,Object> model){
+		
+		MateriaPrima mPrima = null;
+		if(id>0) {
+			mPrima = mPrimaDao.findOne(id);
+			}
+		else {
+			return "redirect:/listarMateriasPrima";
+		}
+		
+		model.put("mPrima", mPrima);
+		model.put("titulo", "Editar Materia Prima");
+		return "formMateriaPrima";
+		
+	}
+	
 	@RequestMapping(value="/formMateriaPrima", method=RequestMethod.POST)
-	public String guardar(@Valid MateriaPrima mPrima, BindingResult result, Model model) { //metodo que procesa el formulario
+	public String guardar(@Valid MateriaPrima mPrima, BindingResult result, Model model, SessionStatus status) { //metodo que procesa el formulario
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Materias Prima");
@@ -47,6 +70,7 @@ public class MateriaPrimaController {
 		}
 		
 		mPrimaDao.save(mPrima);
+		status.setComplete(); //con esto se elimina el objeto mPrima de la sesion.
 		return "redirect:listarMateriasPrima";
 	}
 	

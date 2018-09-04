@@ -20,6 +20,7 @@
 					<th class="columna">Calorias/Unidad Medida</th>
 					<th class="columna">Hidratos de carbono/Unidad Medida</th>
 					<th class="columna">Fibras/Unidad Medida</th>
+					<th class="columna">Editar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,6 +33,7 @@
 					<td th:text="${mp.calUniMed}"></td>
 					<td th:text="${mp.hdcUniMed}"></td>
 					<td th:text="${mp.fibUniMed}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formMateriaPrima/} + ${mp.id}" th:text="Editar"></a></td>
 				</tr>
 			</tbody>
 		</table>

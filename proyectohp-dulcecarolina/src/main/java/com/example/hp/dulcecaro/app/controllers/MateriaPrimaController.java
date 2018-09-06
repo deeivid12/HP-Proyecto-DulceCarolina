@@ -73,7 +73,16 @@ public class MateriaPrimaController {
 		
 		mPrimaDao.save(mPrima);
 		status.setComplete(); //con esto se elimina el objeto mPrima de la sesion.
-		return "redirect:listarMateriasPrima";
+		return "redirect:/listarMateriasPrima";
+	}
+	
+	@RequestMapping(value="/eliminarMateriaPrima/{id}")
+	public String eliminar(@PathVariable(value="id") Long id, Map<String,Object> model){
+		
+		mPrimaDao.delete(id);
+		model.put("boton", "Eliminar Materia Prima");
+		return "redirect:/listarMateriasPrima"; 
+		
 	}
 	
 }

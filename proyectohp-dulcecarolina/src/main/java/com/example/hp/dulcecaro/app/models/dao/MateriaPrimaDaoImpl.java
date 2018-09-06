@@ -38,16 +38,20 @@ public class MateriaPrimaDaoImpl implements IMateriaPrimaDao {
 	}
 	
 
+	@Transactional(readOnly=true)
 	@Override
 	public MateriaPrima findOne(Long id) {
 		
 		return em.find(MateriaPrima.class, id); //se le pasa el id de la materia prima para poder recuperarlo.
 	}
 
-	/*@Override
+	@Transactional
+	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
 		
-	} */
+		MateriaPrima mPrima = findOne(id);
+		em.remove(mPrima);
+		
+	} 
 
 }

@@ -12,7 +12,7 @@ public interface IMateriaPrimaDao {
 	
 	public MateriaPrima findOne(Long id);
 	
-	//public void delete (long id); */
+	public void delete (long id); 
 
 
 }

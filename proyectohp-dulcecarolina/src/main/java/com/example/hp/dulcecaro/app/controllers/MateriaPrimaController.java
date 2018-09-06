@@ -41,6 +41,7 @@ public class MateriaPrimaController {
 		MateriaPrima mPrima = new MateriaPrima(); // aca se pasaran los datos del formulario
 		model.addAttribute("mPrima", mPrima);
 		model.addAttribute("titulo", "Formulario de Materias Prima");
+		model.addAttribute("boton", "Crear Materia prima");
 		return "formMateriaPrima"; // nombre de la vista
 	} 
 	
@@ -57,13 +58,14 @@ public class MateriaPrimaController {
 		
 		model.put("mPrima", mPrima);
 		model.put("titulo", "Editar Materia Prima");
+		model.put("boton", "Actualizar Materia prima");
 		return "formMateriaPrima";
 		
 	}
 	
 	@RequestMapping(value="/formMateriaPrima", method=RequestMethod.POST)
 	public String guardar(@Valid MateriaPrima mPrima, BindingResult result, Model model, SessionStatus status) { //metodo que procesa el formulario
-		
+		 
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Materias Prima");
 			return "formMateriaPrima";

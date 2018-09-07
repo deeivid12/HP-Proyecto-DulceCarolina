@@ -10,9 +10,9 @@ public interface IMateriaPrimaDao {
 	
 	public void save(MateriaPrima mPrima);
 	
-	/*public MateriaPrima findOne(Long id);
+	public MateriaPrima findOne(Long id);
 	
-	public void delete (long id); */
+	public void delete (long id); 
 
 
 }

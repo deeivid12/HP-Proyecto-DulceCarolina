@@ -20,6 +20,9 @@
 					<th class="columna">Calorias/Unidad Medida</th>
 					<th class="columna">Hidratos de carbono/Unidad Medida</th>
 					<th class="columna">Fibras/Unidad Medida</th>
+					<th class="columna">Editar</th>
+					<th class="columna">Eliminar</th>
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -32,6 +35,8 @@
 					<td th:text="${mp.calUniMed}"></td>
 					<td th:text="${mp.hdcUniMed}"></td>
 					<td th:text="${mp.fibUniMed}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formMateriaPrima/} + ${mp.id}" th:text="Editar"></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarMateriaPrima/} + ${mp.id}" th:text="Eliminar" onclick="return confirm('¿Desea eliminar?');"></a></td>
 				</tr>
 			</tbody>
 		</table>

@@ -30,22 +30,28 @@ public class MateriaPrimaDaoImpl implements IMateriaPrimaDao {
 		//el objeto mPrima forma parte del contexto de persistencia. Por lo tanto 
 		//es manejado por jpa, queda "atachado" al contexto
 		
-		// TODO Auto-generated method stub
-		
-		em.persist(mPrima); //toma el objeto mPrima y lo guarda dentro del contexto de persistencia, dentro del contexto jpa
+		if(mPrima.getId() != null && mPrima.getId() > 0) {
+			em.merge(mPrima);
+		}else {
+			em.persist(mPrima); //toma el objeto mPrima y lo guarda dentro del contexto de persistencia, dentro del contexto jpa
+		}
 	}
 	
 
-	/*@Override
+	@Transactional(readOnly=true)
+	@Override
 	public MateriaPrima findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return em.find(MateriaPrima.class, id); //se le pasa el id de la materia prima para poder recuperarlo.
 	}
 
+	@Transactional
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
 		
-	} */
+		MateriaPrima mPrima = findOne(id);
+		em.remove(mPrima);
+		
+	} 
 
 }

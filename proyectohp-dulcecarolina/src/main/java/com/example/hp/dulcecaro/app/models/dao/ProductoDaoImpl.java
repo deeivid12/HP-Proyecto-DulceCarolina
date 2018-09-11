@@ -24,12 +24,32 @@ public class ProductoDaoImpl implements IProductoDao {
 		// TODO Auto-generated method stub
 		return em.createQuery("from Producto").getResultList(); //aca retorna el listado de productos
 	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Producto findOne(Long id) {
+		// TODO Auto-generated method stub
+		return em.find(Producto.class, id);
+	}
 
 	@Override
 	@Transactional //sin readonly ya que es un metodo de escritura
 	public void save(Producto producto) {
 		// TODO Auto-generated method stub
-		em.persist(producto);
+		if (producto.getId() != null && producto.getId() > 0) {
+			em.merge(producto);
+		} else {
+			em.persist(producto);
+		}		
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		//Producto producto = findOne(id);
+		//em.remove(producto);
+		em.remove(findOne(id));
 	}
 
 }

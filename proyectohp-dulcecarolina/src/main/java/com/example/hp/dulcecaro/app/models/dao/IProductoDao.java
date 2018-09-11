@@ -9,4 +9,8 @@ public interface IProductoDao {
 	public List<Producto> findAll(); //simplemente se indica el nombre del metodo, sin implementar
 	
 	public void save(Producto producto);
+	
+	public Producto findOne(Long id);
+	
+	public void delete(Long id);
 }

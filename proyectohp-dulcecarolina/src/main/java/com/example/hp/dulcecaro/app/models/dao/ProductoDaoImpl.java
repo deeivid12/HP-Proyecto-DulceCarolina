@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hp.dulcecaro.app.models.entity.Producto;
 
@@ -18,7 +17,6 @@ public class ProductoDaoImpl implements IProductoDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly=true)
 	@Override
 	public List<Producto> findAll() {
 		// TODO Auto-generated method stub
@@ -26,14 +24,12 @@ public class ProductoDaoImpl implements IProductoDao {
 	}
 	
 	@Override
-	@Transactional(readOnly=true)
 	public Producto findOne(Long id) {
 		// TODO Auto-generated method stub
 		return em.find(Producto.class, id);
 	}
 
 	@Override
-	@Transactional //sin readonly ya que es un metodo de escritura
 	public void save(Producto producto) {
 		// TODO Auto-generated method stub
 		if (producto.getId() != null && producto.getId() > 0) {
@@ -44,7 +40,6 @@ public class ProductoDaoImpl implements IProductoDao {
 	}
 
 	@Override
-	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		//Producto producto = findOne(id);

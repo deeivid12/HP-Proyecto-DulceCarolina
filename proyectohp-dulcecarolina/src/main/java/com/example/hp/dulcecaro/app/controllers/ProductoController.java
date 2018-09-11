@@ -13,22 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-import com.example.hp.dulcecaro.app.models.dao.ClienteDaoImpl;
-import com.example.hp.dulcecaro.app.models.dao.IProductoDao;
 import com.example.hp.dulcecaro.app.models.entity.Producto;
+import com.example.hp.dulcecaro.app.models.service.IProductoService;
 
 @Controller
 @SessionAttributes("producto") //en lugar de usar el campo id oculto en el form, se pueden usar variables de sesion
 public class ProductoController {
 	
 	@Autowired
-	private IProductoDao productoDao;
+	private IProductoService productoService;
 	
 	@RequestMapping(value="/listarProductos", method=RequestMethod.GET)
 	public String listarProductos(Model model) {
 		model.addAttribute("titulo", "Listado de Productos");
-		model.addAttribute("productos", productoDao.findAll());
+		model.addAttribute("productos", productoService.findAll());
 		return "listarProductos";
 	}
 	
@@ -45,7 +43,7 @@ public class ProductoController {
 	public String editar(@PathVariable(value="id") Long id,Map<String, Object> model) {
 		Producto producto = null;
 		if (id > 0) {
-			producto = productoDao.findOne(id);
+			producto = productoService.findOne(id);
 		} else {
 			return "redirect:/listarProductos";
 		}
@@ -62,7 +60,7 @@ public class ProductoController {
 			return "formProducto";
 		}
 		
-		productoDao.save(producto);
+		productoService.save(producto);
 		status.setComplete(); //elimina la sesion del producto
 		return "redirect:listarProductos";
 	}
@@ -70,7 +68,7 @@ public class ProductoController {
 	@RequestMapping(value="/eliminarProducto/{id}")
 	public String eliminar(@PathVariable(value="id") Long id) {
 		if (id > 0) {
-			productoDao.delete(id);
+			productoService.delete(id);
 		}
 		return "redirect:/listarProductos";		
 	}

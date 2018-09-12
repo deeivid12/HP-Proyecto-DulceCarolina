@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.hp.dulcecaro.app.models.dao.IClienteDao;
 import com.example.hp.dulcecaro.app.models.entity.Cliente;
 //HOLA
+//comentario 2
 @Controller //marca y configura la clase como un controlador
 public class ClienteController {
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+	<!-- <div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<input type="button" onclick="location.href='formMateriaPrima.html';" value="Agregar nueva Materia Prima" />
+		
+		 -->
+
+
+	<div class="container py-2">
+
+		<div class="card border-primary">
+			<div class="card-header text-center">Iniciar Sesión</div>
+			<div class="card-body">
+				<form th:action="@{/login}" method="post">
+
+					<div class="form-group col-sm-6">
+						<label class="col-lg-2,5" for="email">E-mail</label> <input
+							type="email" name="email" id="email" class="form-control"
+							placeholder="Ingrese su e-mail" autofocus="" required="" />
+					</div>
+					<div class="form-group col-sm-6">
+						<label class="col-lg-2,5" for="password">Contraseña</label> <input
+							type="password" name="password" id="password"
+							class="form-control" placeholder="Ingrese su contraseña"
+							required="" />
+					</div>
+					<div class="form-group col-sm-6">
+						<input type="submit" class="btn btn-lg btn-primary" value="Iniciar Sesión" />
+					</div>
+
+
+
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

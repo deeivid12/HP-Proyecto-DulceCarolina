@@ -19,7 +19,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**").permitAll() //RUTAS PUBLICAS!!
 		.antMatchers("/form**/**").hasAnyRole("ADMIN")
-		.anyRequest().authenticated();
+		.anyRequest().authenticated()
+		.and()
+			.formLogin().loginPage("/login")
+			.permitAll()
+		.and()
+		.logout().permitAll();
 	}
 
 	@Autowired

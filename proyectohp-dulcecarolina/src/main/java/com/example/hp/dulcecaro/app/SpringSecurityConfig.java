@@ -7,28 +7,47 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.hp.dulcecaro.app.models.service.JpaUserDetailsService;
 
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
+	@Autowired
+	private JpaUserDetailsService userDetailsService;
 	
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { //PARA VALIDAR PERMISOS!
 		
-		http.authorizeRequests().antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**").permitAll() //RUTAS PUBLICAS!!
-		.antMatchers("/form**/**").hasAnyRole("ADMIN")
+		//PARA HABILITAR CONSOLA H2 CON SPRING SECURITY
+		http.csrf().disable();
+        http.headers().frameOptions().disable();
+		
+		http.authorizeRequests().antMatchers("/formMateriaPrima/**").hasAnyRole("ADMIN")
+		.antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**", "/h2-console/**", "/form**/**").permitAll() //RUTAS PUBLICAS!!
 		.anyRequest().authenticated()
 		.and()
 			.formLogin().loginPage("/login")
 			.permitAll()
 		.and()
-		.logout().permitAll();
+		.logout().permitAll()
+		.and()
+		.exceptionHandling().accessDeniedPage("/error_403");
+		
+		
 	}
 
 	@Autowired
 	public void configurerGlobal(AuthenticationManagerBuilder build) throws Exception { //build es el repo en donde se van a guardar los usuarios
+		
+		build.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder);
 		
 		//ACA CONFIGURAR EL PASSWORD ENCODER + JPA!
 	}

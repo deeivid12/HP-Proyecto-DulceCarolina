@@ -26,6 +26,13 @@ public class Rol implements Serializable {
 		this.authority = authority;
 	}
 
+	public void setAuthorityUser() {
+		this.authority = "ROLE_USER";
+	}
+	
+	public void setAuthorityAdmin() {
+		this.authority = "ROLE_ADMIN";
+	}
 	/**
 	 * 
 	 */

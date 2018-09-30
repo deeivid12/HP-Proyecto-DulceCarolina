@@ -25,13 +25,28 @@ public class ClienteDaoImpl implements IClienteDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+	public Cliente findOne(Long id) {
+		return em.find(Cliente.class, id);
+	}
+	
+	@Override
 	@Transactional //no va readOnly=true porque esto es escritura, para insertar un registro
 	public void save(Cliente cliente) {
 		//el objeto cliente forma parte del contexto de persistencia. Por lo tanto 
 		//es manejado por jpa, queda "atachado" al contexto
-		// TODO Auto-generated method stub
 		
-		em.persist(cliente); //toma el objeto cliente y lo guarda dentro del contexto de persistencia, dentro del contexto jpa
+		if(cliente.getId() != null && cliente.getId() >0) {
+			em.merge(cliente);  //atacha al contexto y lo actualiza
+		} else {
+			em.persist(cliente); //toma el objeto cliente y lo guarda dentro del contexto de persistencia, dentro del contexto jpa
+		}
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		em.remove(findOne(id));  //encuentra al cliente y luego lo elimina
 	}
 
 }

@@ -5,11 +5,14 @@
 		<title th:text="${titulo}">Insert title here</title>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
 		<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/all.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/all.min.css}"></link>
 	</head>
 <body>
 	<div class="container">
 		<h1 th:text="${titulo}"></h1>
-		<input type="button" onclick="location.href='formCliente.html';" value="Agregar nuevo cliente" />
+		<a class="btn btn-primary btn-xs"  th:href="@{/formCliente}"><i class="fas fa-plus"></i></a>
+		<!-- th:text="'Agregar nuevo cliente'" -->
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -19,6 +22,8 @@
 					<th class="columna">Email</th>
 					<th class="columna">Correo</th>
 					<th class="columna">Direccion</th>
+					<th class="columna">Editar</th>
+					<th class="columna">Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,6 +35,8 @@
 					<td th:text="${cliente.email}"></td>
 					<td th:text="${cliente.tel}"></td>
 					<td th:text="${cliente.dir}"></td>
+					<td><a class="btn btn-xs"  th:href="@{/formCliente/} + ${cliente.id}"><i class="fas fa-edit"></i></a></td>
+					<td><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('Estás seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			</tbody>
 		</table>

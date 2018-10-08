@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
 import com.example.hp.dulcecaro.app.models.entity.UsuarioDTO;
 import com.example.hp.dulcecaro.app.models.service.UsuarioServiceImpl;
+import com.example.hp.dulcecaro.app.validations.UsuarioExisteException;
 
 @Controller
 public class RegistroController {
@@ -40,11 +41,17 @@ public class RegistroController {
 			BindingResult result,
 			WebRequest request,
 			Errors errors) {
-		
-		//sin validaciones de nada!
-		
+			
 		Usuario registrado = new Usuario();
+		
+		//validacion de email duplicado
+		
+		
 		registrado = crearCuentaUsuario(cuentaDTO, result);
+		
+		if(registrado == null) {
+			result.rejectValue("username", "message.regError");
+		}
 		
 		return new ModelAndView("registro","usuario", cuentaDTO);
 		
@@ -54,7 +61,11 @@ public class RegistroController {
 	private Usuario crearCuentaUsuario(UsuarioDTO cuentaDTO, BindingResult result) {
 		
 		Usuario registrado = null;
+		try {
 		registrado = uService.registrarNuevoUsuario(cuentaDTO);
+		} catch (UsuarioExisteException e) {
+			return null;
+		}
 		return registrado;
 	}
 	

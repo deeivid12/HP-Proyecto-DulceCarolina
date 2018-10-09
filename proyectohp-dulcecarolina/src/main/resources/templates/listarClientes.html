@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
-		<meta charset="UTF-8" />
-		<title th:text="${titulo}">Insert title here</title>
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
-		<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
-		<link rel="stylesheet" th:href="@{/css/all.css}"></link>
-		<link rel="stylesheet" th:href="@{/css/all.min.css}"></link>
-	</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
+	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<h1 th:text="${titulo}"></h1>
 		<a class="btn btn-primary btn-xs"  th:href="@{/formCliente}"><i class="fas fa-plus"></i></a>
@@ -21,7 +15,7 @@
 					<th class="columna">Apellido</th>
 					<th class="columna">Email</th>
 					<th class="columna">Correo</th>
-					<th class="columna">Direccion</th>
+					<th class="columna">Direcci&oacute;n</th>
 					<th class="columna">Editar</th>
 					<th class="columna">Eliminar</th>
 				</tr>
@@ -36,10 +30,11 @@
 					<td th:text="${cliente.tel}"></td>
 					<td th:text="${cliente.dir}"></td>
 					<td><a class="btn btn-xs"  th:href="@{/formCliente/} + ${cliente.id}"><i class="fas fa-edit"></i></a></td>
-					<td><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('EstÃ¡s seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
+					<td><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('Estás seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>	
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

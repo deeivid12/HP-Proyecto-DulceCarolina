@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
+	<head th:fragment="head">
 		<meta charset="UTF-8" />
 		<title th:text="${titulo}">Insert title here</title>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
@@ -9,37 +9,26 @@
 		<link rel="stylesheet" th:href="@{/css/all.min.css}"></link>
 	</head>
 <body>
-	<div class="container">
-		<h1 th:text="${titulo}"></h1>
-		<a class="btn btn-primary btn-xs"  th:href="@{/formCliente}"><i class="fas fa-plus"></i></a>
-		<!-- th:text="'Agregar nuevo cliente'" -->
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th class="columna">Id</th>
-					<th class="columna">Nombre</th>
-					<th class="columna">Apellido</th>
-					<th class="columna">Email</th>
-					<th class="columna">Correo</th>
-					<th class="columna">Direccion</th>
-					<th class="columna">Editar</th>
-					<th class="columna">Eliminar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="cliente: ${clientes}">        <!-- Usamos th para iterar. {clientes} es el nombre del atributo 
-				pasado en la clase controladora, en la linea: model.addAttribute("clientes", clienteDao.findAll()); -->
-					<td th:text="${cliente.id}"></td>      <!-- "cliente" es el objeto del for -->
-					<td th:text="${cliente.nom}"></td>     <!-- Tdos estos cliente.ALGO llaman a los get correspondientes de la entidad Cliente -->
-					<td th:text="${cliente.ape}"></td>
-					<td th:text="${cliente.email}"></td>
-					<td th:text="${cliente.tel}"></td>
-					<td th:text="${cliente.dir}"></td>
-					<td><a class="btn btn-xs"  th:href="@{/formCliente/} + ${cliente.id}"><i class="fas fa-edit"></i></a></td>
-					<td><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('Estás seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>	
+<header th:fragment="header">
+	<nav class="navbar navbar-expand-lg navbar-light fondo-rosa">
+		  <a class="navbar-brand" href="#">Inicio</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="about" th:href="@{/listarClientes}">Clientes<span class="sr-only">(current)</span></a>
+		      </li>
+		      
+		    </ul>
+		  </div>
+	</nav>
+</header>
+<div class="container"> </div>	
+<footer th:fragment="footer" class="container">
+	<p>Contacto: dulcecarolina@gmail.com</p>
+
+</footer>
 </body>
 </html>

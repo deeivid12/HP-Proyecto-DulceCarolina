@@ -30,7 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 		
 		http.authorizeRequests().antMatchers("/formMateriaPrima/**").hasAnyRole("ADMIN")
-		.antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**", "/h2-console/**", "/form**/**", "/registro").permitAll() //RUTAS PUBLICAS!!
+		.antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**", "/h2-console/**", "/form**/**", "/registro", "/**").permitAll() //RUTAS PUBLICAS!!
 		.anyRequest().authenticated()
 		.and()
 			.formLogin().loginPage("/login")

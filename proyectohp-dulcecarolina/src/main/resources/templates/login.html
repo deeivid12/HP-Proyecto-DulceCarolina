@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+	<!-- <div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<input type="button" onclick="location.href='formMateriaPrima.html';" value="Agregar nueva Materia Prima" />
+		
+		 -->
+
+
+	<div class="container py-2">
+
+		<div class="card border-primary">
+			<div class="card-header text-center">Iniciar Sesión</div>
+			<div class="card-body">
+				<form th:action="@{/login}" method="post">
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="username">E-mail</label> <input
+							type="text" name="username" id="username" class="form-control"
+							placeholder="Ingrese su e-mail" autofocus="" required="" />
+					</div>
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="password">Contraseña</label> <input
+							type="password" name="password" id="password"
+							class="form-control" placeholder="Ingrese su contraseña"
+							required="" />
+					</div>
+					<div class="form-group col-sm-2,5">
+						<button type="button" class="btn btn-link btn-link-rosa">¿Ha olvidado
+							su contraseña?</button>
+					</div>
+					
+					<div class="form-group col-sm-3">
+						<input type="submit" class="btn btn-login"
+							value="Iniciar Sesión" />
+					</div>
+
+					<div class="form-group col-sm-2,5">
+						<button type="button" class="btn btn-link btn-link-rosa">Registrarse</button>
+					</div>
+
+
+
+
+
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

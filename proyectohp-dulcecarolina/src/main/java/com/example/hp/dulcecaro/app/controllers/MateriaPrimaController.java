@@ -24,11 +24,9 @@ public class MateriaPrimaController {
 	@Autowired
 	private IMateriaPrimaDao mPrimaDao;
 
-	@RequestMapping(value="/listarMateriasPrima", method=RequestMethod.GET)
+	@RequestMapping(value= {"/listarMateriasPrima","/"}, method=RequestMethod.GET)
 	public String listar(Model model) {
 		
-		//cargarProd();
-		//model.addAttribute("productoObjeto", prodPrueba);
 		
 		model.addAttribute("titulo", "Listado de Materias Prima");
 		model.addAttribute("mPrimas", mPrimaDao.findAll());

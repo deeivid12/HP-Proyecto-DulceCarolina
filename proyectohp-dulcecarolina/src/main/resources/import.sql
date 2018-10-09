@@ -8,3 +8,14 @@ INSERT INTO materias_prima (id_mp, nom_mp, marca_mp, uni_med_mp, cal_uni_med_mp,
 
 INSERT INTO productos VALUES (1,'Tradicional','Producto 1','Descripción del Producto 1',8);
 INSERT INTO productos VALUES (2,'Saludable','Producto 2','Descripción del Producto 2',12);
+
+/* Usuarios con sus roles */
+INSERT INTO usuarios (username, password, enabled) VALUES ('user','$2a$10$4nRLGo/n84lB9ebfS64xz.Nwo1Dy74/VkKmeldo8GUhIG8Z5hq4Ua',1);
+INSERT INTO usuarios (username, password, enabled) VALUES ('admin','$2a$10$WywtLWRiN8UUcT2RRBlX9edi5B.8C1IKYHxqIvCzppe/C1YihJpNW',1);
+INSERT INTO usuarios (username, password, enabled) VALUES ('prueba@prueba.com','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1);
+
+
+INSERT INTO roles (usuario_id, authority) VALUES (1,'ROLE_USER');
+INSERT INTO roles (usuario_id, authority) VALUES (2,'ROLE_ADMIN');
+INSERT INTO roles (usuario_id, authority) VALUES (2,'ROLE_USER');
+INSERT INTO roles (usuario_id, authority) VALUES (3,'ROLE_ADMIN');

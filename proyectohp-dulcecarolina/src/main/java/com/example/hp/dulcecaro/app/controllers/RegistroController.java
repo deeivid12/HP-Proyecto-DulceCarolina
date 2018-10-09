@@ -50,7 +50,7 @@ public class RegistroController {
 		registrado = crearCuentaUsuario(cuentaDTO, result);
 		
 		if(registrado == null) {
-			result.rejectValue("username", "message.regError");
+			result.rejectValue("username", "message.regError","Ya existe un Usuario registrado con ese Email. Por favor, intente con otro nuevamente.");
 		}
 		
 		return new ModelAndView("registro","usuario", cuentaDTO);

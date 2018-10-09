@@ -1,10 +1,10 @@
-package com.example.hp.dulcecaro.app.models.dao;
+package com.example.hp.dulcecaro.app.models.service;
 
 import java.util.List;
 
 import com.example.hp.dulcecaro.app.models.entity.Producto;
 
-public interface IProductoDao {
+public interface IProductoService {
 
 	public List<Producto> findAll(); //simplemente se indica el nombre del metodo, sin implementar
 	

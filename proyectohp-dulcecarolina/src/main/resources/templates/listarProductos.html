@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 	<h1 th:text="${titulo}"></h1>
-	<input type="button" onclick="location.href='formProducto.html';" value="Agregar nuevo producto" />
+	<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar nuevo  producto</a></p>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -18,6 +18,7 @@
 				<th>nombre</th>
 				<th>descripción</th>
 				<th>cantidad de porciones</th>
+				<th>editar</th>			
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +28,9 @@
 				<td th:text="${producto.nom}"></td>
 				<td th:text="${producto.dsc}"></td>
 				<td th:text="${producto.canPor}"></td>
-			</tr>
+				<td><a  class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
+				<td><a  class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
+			</tr><!--  prueba -->
 		</tbody>
 	</table>
 </div>

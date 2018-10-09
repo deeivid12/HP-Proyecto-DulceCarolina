@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-danger text-white">
+			<div class="card-header">Error: No existe la sección</div>
+			<div class="card-body">
+				<h5 class="card-title">
+					Los sentimos, la sección a la cual usted desea acceder no existe.
+				</h5>
+				<a th:href="@{/}" class="btn btn-outline-light" role="button">Volver
+					a Inicio</a>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+</head>
+<body>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-primary text-white">
+			<div class="card-header">Bienvenido!</div>
+			<div class="card-body">
+				<h5 class="card-title">
+					Home de prueba. Todo funciona bien.
+				</h5>
+				<a th:href="@{/listarMateriasPrima}" class="btn btn-outline-light" role="button">Listado M.Primas</a>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

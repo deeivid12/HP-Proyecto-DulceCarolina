@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head th:fragment="head">
+		<meta charset="UTF-8" />
+		<title th:text="${titulo}">Insert title here</title>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/all.css}"></link>
+		<link rel="stylesheet" th:href="@{/css/all.min.css}"></link>
+	</head>
+<body>
+<header th:fragment="header">
+	<nav class="navbar navbar-expand-lg navbar-light fondo-rosa">
+		  <a class="navbar-brand" href="#">Inicio &nbsp; &nbsp; &nbsp; |</a>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="about" th:href="@{/listarClientes}">&nbsp; Clientes &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="about" th:href="@{/listarProductos}">&nbsp; Productos &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="about" th:href="@{/listarProductos}">&nbsp; Materias primas &nbsp; &nbsp; &nbsp;<span class="sr-only">(current)</span></a>
+		      </li>
+		    </ul>
+		  </div>
+	</nav>
+</header>
+<div class="container"> </div>	
+<footer th:fragment="footer" class="page-footer font-small cyan darken-3 bg-secondary">
+	<div class="container py-4">
+		<div class="row">
+		    <div class="col-sm">
+		      CONTACTO: dulcecarolina@gmail.com
+		    </div>
+		    <div class="col-sm">
+		      Encontranos en las redes:
+		    </div>
+		 </div>
+		 <div class="row">
+		    <div class="col-sm">
+		      Celular: 3415555555
+		    </div>
+		    <div class="col-sm">
+		       Face  |   Instagram   
+		    </div>
+		 </div>
+	</div>
+	
+</footer>
+</body>
+</html>
+
+
+  

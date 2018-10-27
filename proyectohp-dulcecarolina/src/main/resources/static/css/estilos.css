@@ -1,5 +1,8 @@
 @charset "ISO-8859-1";
 
+body {
+	background-image: url("muffinsclaro.jpg");
+}
 .columna{
 	font-weight: bold;
 }
@@ -8,13 +11,39 @@
 	background-color: pink;
 }
 
-.btn-crear{
-	background-color: #FF69B4;
-	border-color: #E21F60;
-	border-style: solid;
-	border-width: 1.5px;
+.btn,
+.btn:active {
 	color: white;
 	font-weight: bold;
+  	background-color: #ea5988;
+  	border: transparent;
+}
+
+.btn:hover {
+  background-color: #E21F60;
+  border: transparent;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1) {
+	background-color:#ffeaed;
+	border: 1px solid #808080;
+}
+.table-striped tbody tr:nth-of-type(2n) {
+	background-color:#ffffcc;
+	border: 1px solid #808080;
+}
+
+.table th{
+	background-color:#757575!important;
+	color: white;
+	font-weight: bold;
+	padding: .70rem;
+	border: 1px solid #808080;
+	}
+	
+.table td {
+   padding: .30rem;
+   vertical-align:middle;
 }
 
 .btn-login{
@@ -28,4 +57,8 @@
 
 .btn-link-rosa{
 	color: #FF69B4;
+}
+
+.lineaHorizontal {
+	border-top: solid #fe0166 1px;
 }

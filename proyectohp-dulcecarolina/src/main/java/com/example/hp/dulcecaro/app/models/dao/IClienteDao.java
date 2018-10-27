@@ -11,4 +11,8 @@ public interface IClienteDao {
 	
 	public void save(Cliente cliente); //"contrato" de implementacion para guardar un nuevo cliente en la base de datos
 	
+	public Cliente findOne(Long id);
+	
+	public void delete(Long id);
+	
 }

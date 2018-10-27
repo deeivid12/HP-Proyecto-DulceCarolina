@@ -37,7 +37,6 @@ body {
 	background-color:#757575!important;
 	color: white;
 	font-weight: bold;
-<<<<<<< HEAD
 	padding: .70rem;
 	border: 1px solid #808080;
 	}
@@ -45,8 +44,6 @@ body {
 .table td {
    padding: .30rem;
    vertical-align:middle;
-}
-=======
 }
 
 .btn-login{
@@ -61,4 +58,7 @@ body {
 .btn-link-rosa{
 	color: #FF69B4;
 }
->>>>>>> origin/Form-Login-Roles
+
+.lineaHorizontal {
+	border-top: solid #fe0166 1px;
+}

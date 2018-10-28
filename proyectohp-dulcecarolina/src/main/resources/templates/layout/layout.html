@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 	<head th:fragment="head">
 		<meta charset="UTF-8" />
 		<title th:text="${titulo}">Insert title here</title>
@@ -24,6 +24,20 @@
 		        <a class="nav-link" href="about" th:href="@{/listarProductos}">&nbsp; Materias primas &nbsp; &nbsp; &nbsp;<span class="sr-only">(current)</span></a>
 		      </li>
 		    </ul>
+		  </div>
+		  <div class="login-layout-fila row">
+		  	<div class="login-layout col-6 justify-content-end">
+		  		<a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/login}">Iniciar Sesión</a>
+		  		<a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" th:href="@{/login}">Mi Cuenta</a>
+		  		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/login}">Administrador</a>
+		  		
+		 
+		  		
+		  	</div>
+		  	<div class="login-layout col-6 justify-content-end">
+		  		<a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/registro}">Registrarse</a>
+		  		<a sec:authorize="hasRole('ROLE_USER')" class="btn btn-primary" th:href="@{/logout}">Cerrar Sesión</a>
+		  	</div>
 		  </div>
 	</nav>
 </header>

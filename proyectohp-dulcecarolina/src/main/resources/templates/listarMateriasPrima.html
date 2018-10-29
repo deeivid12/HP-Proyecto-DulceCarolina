@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-	<head>
+	<head th:replace="layout/layout :: head">
 		<meta charset="UTF-8" />
 		<title th:text="${titulo}">Insert title here</title>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
 		<link rel="stylesheet" th:href="@{/css/estilos.css}"></link> 
 	</head>
 <body>
+	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<h1 th:text="${titulo}"></h1>
-		<input type="button" onclick="location.href='formMateriaPrima.html';" value="Agregar nueva Materia Prima" />
+		<a class="btn btn-primary btn-xs"  th:href="@{/formMateriasPrima}"><i class="fas fa-plus"></i></a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -41,5 +42,6 @@
 			</tbody>
 		</table>
 	</div>	
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>Dashboard</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"></meta>
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>
+	<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+	<link rel="stylesheet" href="static/css/fontello.css"></link>
+
+	<!--agregar fuentes de ser necesario!-->
+	<!--agregar iconos a utilizar-->
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="color-fila-ppal row">
+			<div class="barra-lateral col-6 col-sm-5 col-md-4 col-lg-3">
+				<h2 class="titulo-dashboard">Dashboard</h2>
+				<nav class="menu nav justify-content-center flex-column">
+					<a href="#" class="nav-link"><i class="icon-home"></i><span>Inicio</span></a>
+					<a href="#" class="nav-link"><i class="icon-basket"></i><span>Pedidos</span></a>
+					<br/>
+					<a th:href="@{/listarClientes}" class="nav-link"><i class="icon-users"></i><span>Clientes</span></a>
+					<a th:href="@{/listarMateriasPrima}" class="nav-link"><i class="icon-cog"></i><span>Materias Primas</span></a>
+					<a th:href="@{/listarProductos}" class="nav-link"><i class="icon-birthday"></i><span>Productos</span></a>
+					<br/>
+					<a href="#" class="nav-link"><i class="icon-cog-alt"></i><span>Configuracion</span></a>
+					<a th:href="@{/logout}" class="nav-link"><i class="icon-logout"></i><span>Salir</span></a>
+				</nav>
+			</div>
+			<div class="col-bienvenida col-6 col-sm-7 col-md-8 col-lg-9 justify-content-center">
+				<div class="row justify-content-center">
+					<div class="col-bienvenida col-10 col-sm-6">
+						<h4>¡Bienvenido #Nombre_Usuario!</h4>
+					</div>
+				</div>	
+				<div class="row justify-content-center">
+					<div class="widget col-2 offset-2">
+						<h4 class="primario"><i class="icon-basket"></i>Pedidos Pendientes: 45</h4>
+					</div>
+					<div class="widget col-2">
+						<h4 class="primario"><i class="icon-users"></i>Clientes Registrados: 30</h4>
+					</div>
+					<div class="w-100"></div>	
+					<div class="widget col-2">
+						<h4><i class="icon-birthday"></i>Productos Cargados: 20</h4>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	
+
+</body>
+</html>

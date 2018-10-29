@@ -59,6 +59,90 @@ body {
 	color: #FF69B4;
 }
 
+.btn-link-rosa:hover{
+	color: #E21F60;
+}
+
+.card-rosa{
+	border-color: pink;
+}
+
 .lineaHorizontal {
 	border-top: solid #fe0166 1px;
 }
+
+.login-layout-fila{
+	min-width: 300px;
+	max-width: 300px;
+	
+}
+
+.color-fila-ppal{
+	background-color: pink;
+}
+
+.barra-lateral{
+	background-color: #E8A7B5;
+	min-width: 190px;
+	min-height: 100vh;
+	padding: 0;
+}
+
+.barra-lateral a{
+	color: #ffff;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.barra-lateral .menu a i{
+	margin-right: 10px;
+	font-weight: normal;
+}
+
+.barra-lateral .menu a span{
+	margin-right: 15px;
+}
+
+.titulo-dashboard {
+	color: #E8A7B5;
+	text-align: center;
+	padding-top: 30px;
+	background-color: #463237;
+	min-height: 100px;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+
+.col-bienvenida{
+	text-align: center;
+	padding-top: 20px;
+	background-color: pink;
+}
+
+.widget{
+	text-align: center;
+	margin: 40px 40px;
+	
+	max-width: 200px;
+	min-height: 200px;
+	max-height: 200px;
+	background-color: pink;
+}
+
+.widget h4.primario{
+	margin-top: 90px;
+}
+
+.menu a{
+	color: #ffff;
+	padding: 15px;
+}
+
+.menu a:hover{
+	background: rgba(255, 105, 180, 0.36);
+
+}
+
+
+

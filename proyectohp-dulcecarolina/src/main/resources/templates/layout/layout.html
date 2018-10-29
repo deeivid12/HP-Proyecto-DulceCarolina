@@ -21,15 +21,15 @@
 		        <a class="nav-link" href="about" th:href="@{/listarProductos}">&nbsp; Productos &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item active">
-		        <a class="nav-link" href="about" th:href="@{/listarProductos}">&nbsp; Materias primas &nbsp; &nbsp; &nbsp;<span class="sr-only">(current)</span></a>
+		        <a class="nav-link" href="about" th:href="@{/listarMateriasPrima}">&nbsp; Materias primas &nbsp; &nbsp; &nbsp;<span class="sr-only">(current)</span></a>
 		      </li>
 		    </ul>
 		  </div>
 		  <div class="login-layout-fila row">
 		  	<div class="login-layout col-6 justify-content-end">
 		  		<a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/login}">Iniciar Sesión</a>
-		  		<a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" th:href="@{/login}">Mi Cuenta</a>
-		  		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/login}">Administrador</a>
+		  		<a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" href="#">Mi Cuenta</a>
+		  		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/dashboard}">Administrador</a>
 		  		
 		 
 		  		

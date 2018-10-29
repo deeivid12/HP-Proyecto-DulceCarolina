@@ -59,6 +59,14 @@ body {
 	color: #FF69B4;
 }
 
+.btn-link-rosa:hover{
+	color: #E21F60;
+}
+
+.card-rosa{
+	border-color: pink;
+}
+
 .lineaHorizontal {
 	border-top: solid #fe0166 1px;
 }
@@ -74,11 +82,6 @@ body {
 }
 
 .barra-lateral{
-	/*definir
-	font-size
-	font-family
-	background: #262a34;
-	color: #ffff;*/
 	background-color: #E8A7B5;
 	min-width: 190px;
 	min-height: 100vh;
@@ -140,5 +143,6 @@ body {
 	background: rgba(255, 105, 180, 0.36);
 
 }
+
 
 

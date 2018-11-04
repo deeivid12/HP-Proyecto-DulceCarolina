@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -49,6 +51,17 @@ public class Cliente implements Serializable {  //implementar Serializable es bu
 	 * 	createAt = new Date();
 	 * }
 	 * */
+	
+	@OneToOne //PARA LA RELACION USUARIO-CLIENTE!!
+	@PrimaryKeyJoinColumn
+	private Usuario usuario;
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 	public Long getId() {
 		return id;

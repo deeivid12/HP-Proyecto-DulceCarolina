@@ -2,12 +2,13 @@ package com.example.hp.dulcecaro.app.models.entity;
 
 
 import java.io.Serializable;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -19,22 +20,43 @@ public class Producto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_pro")
 	private Long id;
 	
-	//@Column se utiliza cuando los nombres de los atributos en las clases difieren de los de la tabla
-	
 	@NotEmpty
+	@Column(name="tipo_pro")
 	private String tipo;
 	
 	@NotEmpty
+	@Column(name="nom_pro")
 	private String nom;
 	
+	@Column(name="dsc_pro")
 	private String dsc;
 	
-	@NotEmpty
-	private String canPor;
+	@Min(1)
+	@Column(name="can_por_pro")
+	private Long canPor;
 	
+	@Column(name="cal_porc_pro")
+	private Double calPorPorc;
+	
+	@Column(name="hdc_porc_pro")
+	private Double hdcPorPorc;
+	
+	@Column(name="fib_porc_pro")
+	private Double fibPorPorc;
+	
+	@Column(name = "pre_pro")
+	private Double precio;
+	
+	public Double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -59,10 +81,28 @@ public class Producto implements Serializable {
 	public void setDsc(String dsc) {
 		this.dsc = dsc;
 	}
-	public String getCanPor() {
+	public Long getCanPor() {
 		return canPor;
 	}
-	public void setCanPor(String canPor) {
+	public void setCanPor(Long canPor) {
 		this.canPor = canPor;
+	}
+	public double getCalPorPorc() {
+		return calPorPorc;
+	}
+	public void setCalPorPorc(Double calPorPorc) {
+		this.calPorPorc = calPorPorc;
+	}
+	public double getHdcPorPorc() {
+		return hdcPorPorc;
+	}
+	public void setHdcPorPorc(Double hdcPorPorc) {
+		this.hdcPorPorc = hdcPorPorc;
+	}
+	public double getFibPorPorc() {
+		return fibPorPorc;
+	}
+	public void setFibPorPorc(Double fibPorPorc) {
+		this.fibPorPorc = fibPorPorc;
 	}
 }

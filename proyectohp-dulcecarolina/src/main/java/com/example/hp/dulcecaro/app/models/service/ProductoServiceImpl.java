@@ -19,7 +19,7 @@ public class ProductoServiceImpl implements IProductoService{
 	@Transactional(readOnly=true)
 	public List<Producto> findAll() {
 		// TODO Auto-generated method stub
-		return productoDao.findAll();
+		return (List<Producto>) productoDao.findAll();
 	}
 
 	@Override
@@ -40,6 +40,12 @@ public class ProductoServiceImpl implements IProductoService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		productoDao.delete(id);
+	}
+
+	@Override
+	public List<Producto> findByNombre(String term) {
+		// TODO Auto-generated method stub
+		return productoDao.findByNomLikeIgnoreCase("%"+term+"%");
 	}
 
 	

@@ -14,6 +14,16 @@ public class UsuarioDTO { //clase que transferira todos los datos del usuario
 	@NotNull
 	@NotEmpty
 	private String password;
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	private Cliente cliente;
 
 	public String getUsername() {
 		return username;

@@ -55,8 +55,7 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 	//en el mappedby se indica el nombre del atributo usado en la tabla dueña de la relacion
 	@OneToMany(mappedBy="cliente",fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Pedido> pedidos;
-	
-	/*
+		/*
 	 * @PrePersist public void prePersist() { createAt = new Date(); }
 	 */
 
@@ -64,6 +63,17 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 		pedidos = new ArrayList<Pedido>();
 	}
 
+	@OneToOne //PARA LA RELACION USUARIO-CLIENTE!!
+	@PrimaryKeyJoinColumn
+	private Usuario usuario;
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+  
 	public Long getId() {
 		return id;
 	}

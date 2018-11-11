@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hp.dulcecaro.app.models.dao.IUsuarioDao;
+import com.example.hp.dulcecaro.app.models.entity.Cliente;
 import com.example.hp.dulcecaro.app.models.entity.Rol;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
 import com.example.hp.dulcecaro.app.models.entity.UsuarioDTO;
@@ -32,13 +33,22 @@ public class UsuarioServiceImpl implements IUsuarioService {
 			};
 					
 		Usuario usuario = new Usuario();
+		Cliente cliente = new Cliente();
 		Rol rol = new Rol();
 		rol.setAuthorityUser();//para que por defecto sea ROLE_USER
 		
+				
 		usuario.setUsername(cuentaDTO.getUsername());
 		usuario.setPassword(passwordEncoder.encode(cuentaDTO.getPassword()));
 		usuario.setEnabled(true); //deberia habilitarse cuando se manda confirmacion de cuenta!
 		usuario.setRoles(Arrays.asList(rol));
+		
+		cliente.setNom(cuentaDTO.getCliente().getNom());
+		cliente.setTel(cuentaDTO.getCliente().getTel());
+		cliente.setEmail(usuario.getUsername());
+		cliente.setApe(cuentaDTO.getCliente().getApe());
+		cliente.setDir(cuentaDTO.getCliente().getDir());
+		usuario.setCliente(cliente);
 		
 		return usuarioDao.save(usuario);
 	}

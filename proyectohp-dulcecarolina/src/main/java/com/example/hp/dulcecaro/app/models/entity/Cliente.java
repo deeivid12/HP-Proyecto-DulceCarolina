@@ -1,12 +1,15 @@
 package com.example.hp.dulcecaro.app.models.entity;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -34,7 +37,7 @@ public class Cliente implements Serializable {  //implementar Serializable es bu
 	private String ape;
 	
 	@Column(name="email",unique=true,updatable=true)
-	@NotEmpty
+	//@NotEmpty
 	@Email
 	private String email;
 	
@@ -52,8 +55,7 @@ public class Cliente implements Serializable {  //implementar Serializable es bu
 	 * }
 	 * */
 	
-	@OneToOne //PARA LA RELACION USUARIO-CLIENTE!!
-	@PrimaryKeyJoinColumn
+	@OneToOne(mappedBy = "cliente") //PARA LA RELACION USUARIO-CLIENTE
 	private Usuario usuario;
 	
 	public Usuario getUsuario() {

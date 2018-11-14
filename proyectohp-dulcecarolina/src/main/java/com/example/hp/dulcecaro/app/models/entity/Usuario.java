@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@Column(length = 100, unique = true)
-	private String username; // seria nuestro username
+	private String username; 
 
 	@Column(length = 60)
 	private String password;
@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
 	private List<Rol> roles;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "cliente_id") // para traer el cliente
 	private Cliente cliente;
 
 	public Cliente getCliente() {

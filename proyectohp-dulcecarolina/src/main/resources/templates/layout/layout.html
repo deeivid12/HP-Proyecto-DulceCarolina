@@ -28,7 +28,7 @@
 		  <div class="login-layout-fila row">
 		  	<div class="login-layout col-6 justify-content-end">
 		  		<a sec:authorize="!isAuthenticated()" class="btn btn-primary" th:href="@{/login}">Iniciar Sesión</a>
-		  		<a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" href="#">Mi Cuenta</a>
+		  		<a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="btn btn-primary" th:href="@{/miCuenta}">Mi Cuenta</a>
 		  		<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" th:href="@{/dashboard}">Administrador</a>
 		  		
 		 

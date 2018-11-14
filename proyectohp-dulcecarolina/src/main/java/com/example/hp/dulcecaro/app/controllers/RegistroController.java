@@ -1,8 +1,12 @@
 package com.example.hp.dulcecaro.app.controllers;
 
+import java.util.Locale;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -11,15 +15,21 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.hp.dulcecaro.app.models.entity.MateriaPrima;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
 import com.example.hp.dulcecaro.app.models.entity.UsuarioDTO;
 import com.example.hp.dulcecaro.app.models.service.UsuarioServiceImpl;
 import com.example.hp.dulcecaro.app.validations.UsuarioExisteException;
 
+
 @Controller
+@SessionAttributes("uActual")
 public class RegistroController {
 	
 	@Autowired
@@ -33,7 +43,7 @@ public class RegistroController {
 		
 		return "registro";
 	}
-	
+		
 	
 	@RequestMapping (value="/registro", method=RequestMethod.POST)
 	public ModelAndView registrarUsuario(
@@ -68,6 +78,33 @@ public class RegistroController {
 		}
 		return registrado;
 	}
+	
+	
+	@RequestMapping (value="/miCuenta", method=RequestMethod.GET)
+	public String miCuenta(
+			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
+			Map<String, Object> model) {
+			
+		//Usuario uActual = new Usuario();
+		Usuario uActual = null;
+		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		model.put("uActual", uActual);
+		return "miCuenta"; 
+	}
+	
+	@RequestMapping (value="/miCuenta", method=RequestMethod.POST)
+	public String guardar(@Valid Usuario uActual, BindingResult result, Model model, SessionStatus status
+			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
+			) {
+			
+		uService.save(uActual);
+		status.setComplete();
+		return "redirect:/";
+		
+	}
+	
+	
+
 	
 	
 	

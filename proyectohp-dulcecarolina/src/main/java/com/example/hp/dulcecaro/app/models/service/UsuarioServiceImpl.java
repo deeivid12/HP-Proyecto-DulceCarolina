@@ -63,5 +63,15 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		return false;
 	}
 	
+	public Usuario findByUsername(String username) {
+		Usuario usuario = usuarioDao.findByUsername(username);
+		return usuario;
+	}
+	
+	public void save(Usuario usuario) {
+		
+		usuarioDao.save(usuario);
+	}
+	
 
 }

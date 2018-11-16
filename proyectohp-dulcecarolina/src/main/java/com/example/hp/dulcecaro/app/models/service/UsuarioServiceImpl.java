@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hp.dulcecaro.app.models.dao.IUsuarioDao;
+import com.example.hp.dulcecaro.app.models.dao.IUsuarioDaoCustom;
 import com.example.hp.dulcecaro.app.models.entity.Cliente;
 import com.example.hp.dulcecaro.app.models.entity.Rol;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
@@ -19,6 +20,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Autowired
 	private IUsuarioDao usuarioDao;
+	
+	@Autowired
+	private IUsuarioDaoCustom usuarioDaoCustom;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -71,6 +75,11 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public void save(Usuario usuario) {
 		
 		usuarioDao.save(usuario);
+	}
+	
+	public void merge(Usuario usuario) {
+		
+		usuarioDaoCustom.merge(usuario);
 	}
 	
 

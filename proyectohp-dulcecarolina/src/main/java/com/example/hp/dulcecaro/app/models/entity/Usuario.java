@@ -23,10 +23,10 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 100, unique = true)
+	@Column(length = 100, unique = true,updatable=true)
 	private String username; 
 
-	@Column(length = 60)
+	@Column(length = 60,updatable=true)
 	private String password;
 
 	private Boolean enabled;

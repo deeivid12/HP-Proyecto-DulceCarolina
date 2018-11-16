@@ -85,8 +85,8 @@ public class RegistroController {
 			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
 			Map<String, Object> model) {
 			
-		//Usuario uActual = new Usuario();
-		Usuario uActual = null;
+		Usuario uActual = new Usuario();
+		//Usuario uActual = null;
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		model.put("uActual", uActual);
 		return "miCuenta"; 
@@ -97,8 +97,13 @@ public class RegistroController {
 			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
 			) {
 			
-		uService.save(uActual);
-		status.setComplete();
+		
+		//todo esto es mejor ponerlo en service
+		
+		
+		uActual.getCliente().setEmail(uActual.getUsername());
+		
+		uService.merge(uActual);
 		return "redirect:/";
 		
 	}

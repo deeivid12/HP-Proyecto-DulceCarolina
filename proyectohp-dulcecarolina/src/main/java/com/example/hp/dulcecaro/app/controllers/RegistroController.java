@@ -1,11 +1,16 @@
 package com.example.hp.dulcecaro.app.controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -13,8 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -22,8 +29,10 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.hp.dulcecaro.app.models.entity.MateriaPrima;
+import com.example.hp.dulcecaro.app.models.entity.Rol;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
 import com.example.hp.dulcecaro.app.models.entity.UsuarioDTO;
+import com.example.hp.dulcecaro.app.models.service.JpaUserDetailsService;
 import com.example.hp.dulcecaro.app.models.service.UsuarioServiceImpl;
 import com.example.hp.dulcecaro.app.validations.UsuarioExisteException;
 
@@ -34,6 +43,7 @@ public class RegistroController {
 	
 	@Autowired
 	private UsuarioServiceImpl uService; 
+	
 	
 	@RequestMapping(value="/registro", method=RequestMethod.GET)
 	public String showRegistrationForm(WebRequest request, Model model) {
@@ -83,29 +93,43 @@ public class RegistroController {
 	@RequestMapping (value="/miCuenta", method=RequestMethod.GET)
 	public String miCuenta(
 			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
-			Map<String, Object> model) {
-			
+			Map<String, Object> model)
+			 {
+		
+		
+		
 		Usuario uActual = new Usuario();
-		//Usuario uActual = null;
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		model.put("uActual", uActual);
+		model.put("roles", uActual.getRoles());
+		model.put("oldPass", uActual.getPassword());
+		
+		
 		return "miCuenta"; 
 	}
 	
 	@RequestMapping (value="/miCuenta", method=RequestMethod.POST)
-	public String guardar(@Valid Usuario uActual, BindingResult result, Model model, SessionStatus status
-			//@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
-			) {
+	public String guardar(@Valid Usuario uActual, BindingResult result, Model model, SessionStatus status,
+			@RequestParam("password") String password) {
+				
+		model.addAttribute("password", password);
+		
+		String oldPass = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getPassword();
 			
-		
-		//todo esto es mejor ponerlo en service
-		
-		
 		uActual.getCliente().setEmail(uActual.getUsername());
 		
-		uService.merge(uActual);
-		return "redirect:/";
+		if (uService.encriptar(password).equals(oldPass) || password.length()==0) {
+			
+			uActual.setPassword(oldPass);
+			uService.merge(uActual);	
+		} else {
+			
+			uService.merge(uService.cambiarPassword(uActual, password));			
+		}
 		
+		
+				
+		return "redirect:/";		
 	}
 	
 	

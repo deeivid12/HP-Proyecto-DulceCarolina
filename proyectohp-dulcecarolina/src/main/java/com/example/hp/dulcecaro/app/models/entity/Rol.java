@@ -7,15 +7,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "roles") // "authorities"
+@Table(name = "roles", uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "authority"})}) // "authorities"
 public class Rol implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	private String authority; // nombre del rol
 
 	public String getAuthority() {

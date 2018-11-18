@@ -82,5 +82,18 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		usuarioDaoCustom.merge(usuario);
 	}
 	
+	public Usuario cambiarPassword(Usuario usuario, String password) {
+		
+		
+		usuario.setPassword(passwordEncoder.encode(password));
+		return usuario;
+				
+	}
+	
+	public String encriptar(String password) {
+		String passEncriptado = passwordEncoder.encode(password);
+		return passEncriptado;
+	}
+	
 
 }

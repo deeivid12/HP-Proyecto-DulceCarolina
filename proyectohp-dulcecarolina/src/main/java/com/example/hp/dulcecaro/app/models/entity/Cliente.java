@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -78,14 +80,6 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 		return id;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -128,6 +122,14 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 
 	public void setDir(String dir) {
 		this.dir = dir;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 	public void addPedido(Pedido pedido) {

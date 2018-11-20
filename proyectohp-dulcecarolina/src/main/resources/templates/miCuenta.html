@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<!-- No pongo header porque es pantalla de actualizar cuenta. no hace falta 
+	<header th:replace="layout/layout :: header"></header> -->
+	<div class="container py-2">
+
+		<div class="card-rosa card">
+			<div class="card-header text-center">Actualizar Mi Cuenta</div>
+			<div class="card-body">
+
+				<form th:action="@{/miCuenta}" th:object="${uActual}" method="post">
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="nombre">Nombre</label> <input
+							th:field="*{cliente.nom}" type="text" name="nombre" id="nombre"
+							class="form-control" placeholder="Ingrese su nombre" autofocus=""
+							required="" />
+					</div>
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="ape">Apellido</label> <input
+							th:field="*{cliente.ape}" type="text" name="ape" id="ape"
+							class="form-control" placeholder="Ingrese su apellido"
+							autofocus="" required="" />
+					</div>
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="tel">Telefono</label> <input
+							th:field="*{cliente.tel}" type="text" name="tel" id="tel"
+							class="form-control" placeholder="Ingrese su telefono"
+							autofocus="" required="" />
+					</div>
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="nombre">Direccion</label> <input
+							th:field="*{cliente.dir}" type="text" name="dir" id="dir"
+							class="form-control" placeholder="Ingrese su direccion"
+							autofocus="" required="" />
+					</div>
+
+					<input type="hidden" th:field="*{id}" name="dir" id="dir"
+						class="form-control" placeholder="Ingrese su direccion"
+						autofocus="" required="" /> <input type="hidden"
+						th:field="*{cliente.id}" name="dir" id="dir" class="form-control"
+						placeholder="" autofocus="" required="" />
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="username">E-mail</label> <input
+							th:field="*{username}" type="text" name="username" id="username"
+							class="form-control" placeholder="Ingrese su e-mail" />
+					</div>
+
+					<div class="form-group col-sm-5">
+						<label class="col-lg-2,5" for="password">Nuevo Password</label> <input
+							th:text="${password}" type="password" name="password" id="password"
+							class="form-control" placeholder="Ingrese su nuevo password" />
+					</div>
+
+					<table>
+						<tbody>
+							<tr th:each="rol, rolStat : ${roles}">
+								<td><input type="hidden"
+									th:field="*{roles[__${rolStat.index}__].id}" /></td>
+								<td><input type="hidden"
+									th:field="*{roles[__${rolStat.index}__].authority}" /></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<input type="hidden" id="estado" name="estado"
+						th:field="*{enabled}"></input>
+
+					<div class="form-group col-sm-3">
+						<input type="submit" class="btn btn-login" value="Actualizar" />
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -14,6 +14,9 @@ public class UsuarioDTO { //clase que transferira todos los datos del usuario
 	@NotNull
 	@NotEmpty
 	private String password;
+
+	private Cliente cliente;
+	private Rol rol;
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -23,7 +26,13 @@ public class UsuarioDTO { //clase que transferira todos los datos del usuario
 		this.cliente = cliente;
 	}
 
-	private Cliente cliente;
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
 	public String getUsername() {
 		return username;

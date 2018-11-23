@@ -98,6 +98,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.hp.dulcecaro.app.models.entity.MateriaPrima;
 import com.example.hp.dulcecaro.app.models.entity.Rol;
@@ -129,8 +130,10 @@ public class RegistroController {
 	@RequestMapping (value="/registro", method=RequestMethod.POST)
 	public ModelAndView registrarUsuario(
 			@ModelAttribute("usuario") @Valid UsuarioDTO cuentaDTO,
-			BindingResult result,
 			WebRequest request,
+			BindingResult result,
+			Model model,
+			RedirectAttributes flash,
 			Errors errors) {
 			
 		Usuario registrado = new Usuario();
@@ -141,10 +144,15 @@ public class RegistroController {
 		registrado = crearCuentaUsuario(cuentaDTO, result);
 		
 		if(registrado == null) {
+			model.addAttribute("danger", "Email ya registrado. Por favor, intente con otro nuevamente.");
 			result.rejectValue("username", "message.regError","Ya existe un Usuario registrado con ese Email. Por favor, intente con otro nuevamente.");
+		} else {
+			model.addAttribute("success","Usuario registrado con éxito.");
 		}
 		
-		return new ModelAndView("registro","usuario", cuentaDTO);
+		//return new ModelAndView("registro","usuario", cuentaDTO);	
+		return new ModelAndView("login");			
+
 		
 	}
 	
@@ -180,7 +188,7 @@ public class RegistroController {
 	
 	@RequestMapping (value="/miCuenta", method=RequestMethod.POST)
 	public String guardar(@Valid Usuario uActual, BindingResult result, Model model, SessionStatus status,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password, RedirectAttributes flash) {
 				
 		model.addAttribute("password", password);
 		
@@ -194,9 +202,11 @@ public class RegistroController {
 			uService.merge(uActual);	
 		} else {
 			
-			uService.merge(uService.cambiarPassword(uActual, password));			
+			uService.merge(uService.cambiarPassword(uActual, password));	
+			
 		}
 				
-		return "redirect:/";		
+		flash.addFlashAttribute("success", "Cambios guardados.");
+		return "redirect:/home";		
 	}
 }

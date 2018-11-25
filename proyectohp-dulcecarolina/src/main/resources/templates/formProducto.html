@@ -1,27 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title th:text="${titulo}">Insert title here</title>
-<!-- <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />  -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
-<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light fondo-rosa">
-	  <a class="navbar-brand" href="#">Inicio</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="about" th:href="@{/listarClientes}">Productos<span class="sr-only">(current)</span></a>____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-	      </li>
-	      
-	    </ul>
-	  </div>
-	</nav>
+	<header th:replace="layout/layout :: headerAdmin"></header>
 	<div class="container">
 	<p></p>
 
@@ -48,7 +29,7 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Descripci贸n</label>
+			<label class="col-sm-2 col-form-label">Descripci髇</label>
 			<div class="col-sm-4">
 				<input type="text" th:field="*{dsc}" class="form-control"/>
 				<small class="form-text text-danger" th:if="${#fields.hasErrors('dsc')}" th:errors="*{dsc}"></small>
@@ -64,7 +45,7 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Calor铆as por Porci贸n</label>
+			<label class="col-sm-2 col-form-label">Calor韆s por Porci髇</label>
 			<div class="col-sm-4">
 				<input type="text" th:field="*{calPorPorc}" class="form-control"/>
 				<small class="form-text text-danger" th:if="${#fields.hasErrors('canPor')}" th:errors="*{calPorPorc}"></small>
@@ -72,7 +53,7 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Hidratos de Carbono por Porci贸n</label>
+			<label class="col-sm-2 col-form-label">Hidratos de Carbono por Porci髇</label>
 			<div class="col-sm-4">
 				<input type="text" th:field="*{hdcPorPorc}" class="form-control"/>
 				<small class="form-text text-danger" th:if="${#fields.hasErrors('canPor')}" th:errors="*{hdcPorPorc}"></small>
@@ -80,7 +61,7 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Fibras por Porci贸n</label>
+			<label class="col-sm-2 col-form-label">Fibras por Porci髇</label>
 			<div class="col-sm-4">
 				<input type="text" th:field="*{fibPorPorc}" class="form-control"/>
 				<small class="form-text text-danger" th:if="${#fields.hasErrors('canPor')}" th:errors="*{fibPorPorc}"></small>
@@ -95,5 +76,6 @@
 		</div>
 	</form>
 </div>
+<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

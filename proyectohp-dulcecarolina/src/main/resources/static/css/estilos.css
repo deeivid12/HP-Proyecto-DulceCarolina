@@ -11,6 +11,10 @@ body {
 	background-color: pink;
 }
 
+.fondo-rosa-dark{
+	background-color: #E599C4;
+}
+
 .btn,
 .btn:active {
 	color: white;

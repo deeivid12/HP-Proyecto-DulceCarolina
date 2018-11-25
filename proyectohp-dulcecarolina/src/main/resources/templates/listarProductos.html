@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8"/>
-<title th:text="${titulo}">Insert title here</title>
-<!-- <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>  -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
-<div class="container">
-	<h1 th:text="${titulo}"></h1>
-	<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar</a></p>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Tipo</th>
-				<th>Nombre</th>
-				<th>Descripción</th>
-				<th>Cantidad de porciones</th>
-				<th>Calorías por Porción</th>
-				<th>Cabrohidratos por Porción</th>
-				<th>Fibras por Porción</th>
-				<th>Editar</th>
-				<th>Eliminar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr  th:each="producto: ${productos}">
-				<td th:text="${producto.id}"></td> <!-- llama al metodo get -->
-				<td th:text="${producto.tipo}"></td>
-				<td th:text="${producto.nom}"></td>
-				<td th:text="${producto.dsc}"></td>
-				<td th:text="${producto.canPor}"></td>
-				<td th:text="${producto.calPorPorc}"></td>
-				<td th:text="${producto.hdcPorPorc}"></td>
-				<td th:text="${producto.fibPorPorc}"></td>
-				<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
-				<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
+	<header th:replace="layout/layout :: headerAdmin"></header>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar</a></p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tipo</th>
+					<th>Nombre</th>
+					<th>Descripci&oacute;n</th>
+					<th>Cantidad de porciones</th>
+					<th>Calor&iacute;as por Porci&oacute;n</th>
+					<th>Cabrohidratos por Porci&oacute;n</th>
+					<th>Fibras por Porci&oacute;n</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  th:each="producto: ${productos}">
+					<td th:text="${producto.id}"></td> <!-- llama al metodo get -->
+					<td th:text="${producto.tipo}"></td>
+					<td th:text="${producto.nom}"></td>
+					<td th:text="${producto.dsc}"></td>
+					<td th:text="${producto.canPor}"></td>
+					<td th:text="${producto.calPorPorc}"></td>
+					<td th:text="${producto.hdcPorPorc}"></td>
+					<td th:text="${producto.fibPorPorc}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

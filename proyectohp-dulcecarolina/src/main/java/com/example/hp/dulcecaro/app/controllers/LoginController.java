@@ -18,20 +18,16 @@ public class LoginController {
 		
 		if(principal != null) { //si ya esta logueado, redirigir a /
 			flash.addFlashAttribute("info", "Ya ha iniciado sesión anteriormente.");
-			return "redirect:/listarMateriasPrima";
+			return "redirect:/home";
 		}
 		
 		if (error != null) {
-			model.addAttribute("error", "Nombre de Usuario o Contraseña incorrectos. Por favor, ingrese nuevamente.");
-		} //"error" es el tipo de mensaje que se va a enviar! (en color rojo, por ejemplo)
+			model.addAttribute("danger", "Nombre de Usuario o Contraseña incorrectos. Por favor, ingrese nuevamente.");
+		} //se usa model porque el mensaje se carga en la misma vista, no redirecciona como con flash)
 		
-		//model.addAttribute("titulo","Iniciar Sesión");
 		return "login";
 	}
 	
-	//PARA QUE FUNCIONEN LOS MENSAJES DE EXITO, ERROR, INFO, ETC, HAY QUE CONFIGURARLOS EN EL LAYOUT! 
-	//ES DECIR, CONFIGURAR UN LAYOUT Y DESPUES CARGARLO POR DEFECTO EN TODAS LAS VISTAS DEL SISTEMA.
-	//PENDIENTE, HAY QUE HACERLO!!
 	
 	@RequestMapping(value= "/forgotPassword", method=RequestMethod.GET)
 	public String forgot(Model model) {

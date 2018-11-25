@@ -80,14 +80,6 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 		return id;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -130,6 +122,14 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 
 	public void setDir(String dir) {
 		this.dir = dir;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 	public void addPedido(Pedido pedido) {

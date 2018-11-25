@@ -24,7 +24,7 @@ public class MateriaPrimaController {
 	@Autowired
 	private IMateriaPrimaDao mPrimaDao;
 
-	@RequestMapping(value= {"/listarMateriasPrima","/"}, method=RequestMethod.GET)
+	@RequestMapping(value="/listarMateriasPrima", method=RequestMethod.GET)
 	public String listar(Model model) {
 		
 		

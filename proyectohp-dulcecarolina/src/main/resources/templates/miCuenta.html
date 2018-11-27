@@ -2,6 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
 	xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
+<meta charset="UTF-8" />
 <body>
 	<!-- No pongo header porque es pantalla de actualizar cuenta. no hace falta 
 	<header th:replace="layout/layout :: header"></header> -->
@@ -58,6 +59,8 @@
 						<label class="col-lg-2,5" for="password">Nuevo Password</label> <input
 							th:text="${password}" type="password" name="password" id="password"
 							class="form-control" placeholder="Ingrese su nuevo password" />
+							
+							<label>Nota: Si no desea actualizar contraseña, deje el campo vacío.</label> 
 					</div>
 
 					<table>

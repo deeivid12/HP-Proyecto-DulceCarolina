@@ -146,12 +146,14 @@ public class RegistroController {
 		if(registrado == null) {
 			model.addAttribute("danger", "Email ya registrado. Por favor, intente con otro nuevamente.");
 			result.rejectValue("username", "message.regError","Ya existe un Usuario registrado con ese Email. Por favor, intente con otro nuevamente.");
+			return new ModelAndView("registro");	
 		} else {
 			model.addAttribute("success","Usuario registrado con éxito.");
+			return new ModelAndView("login");	
 		}
 		
 		//return new ModelAndView("registro","usuario", cuentaDTO);	
-		return new ModelAndView("login");			
+				
 
 		
 	}

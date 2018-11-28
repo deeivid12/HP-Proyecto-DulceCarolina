@@ -87,19 +87,19 @@ public class Producto implements Serializable {
 	public void setCanPor(Long canPor) {
 		this.canPor = canPor;
 	}
-	public double getCalPorPorc() {
+	public Double getCalPorPorc() {
 		return calPorPorc;
 	}
 	public void setCalPorPorc(Double calPorPorc) {
 		this.calPorPorc = calPorPorc;
 	}
-	public double getHdcPorPorc() {
+	public Double getHdcPorPorc() {
 		return hdcPorPorc;
 	}
 	public void setHdcPorPorc(Double hdcPorPorc) {
 		this.hdcPorPorc = hdcPorPorc;
 	}
-	public double getFibPorPorc() {
+	public Double getFibPorPorc() {
 		return fibPorPorc;
 	}
 	public void setFibPorPorc(Double fibPorPorc) {

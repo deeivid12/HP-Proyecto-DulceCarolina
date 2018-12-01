@@ -36,7 +36,7 @@
 						</div>
 					</div>
 
-					<table th:replace="pedido/plantilla-items :: itemsFactura"></table>
+					<table th:replace="pedido/plantilla-items :: itemsPedido"></table>
 
 					<table id="cargarItemProductos"
 						class="table table-sm table-striped table-hover">
@@ -53,6 +53,7 @@
 
 						</tbody>
 					</table>
+					<h5>Total<span class="badge badge-secondary" id="gran_total">0</span></h5>
 
 					<div class="form-group row">
 						<div class="col-sm-6">

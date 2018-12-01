@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class ItemPedido implements Serializable {
 	
 	//Relacion agregada y necesaria para indicar que el id pedido forma parte de la PK del item
-	@Id
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Pedido pedido;
+//	@Id
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	private Pedido pedido;
 	
 	@Id
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -30,6 +30,14 @@ public class ItemPedido implements Serializable {
 	@Column(name="imp_ip")
 	private Double importe;
 	
+//	public Pedido getPedido() {
+//		return pedido;
+//	}
+//
+//	public void setPedido(Pedido pedido) {
+//		this.pedido = pedido;
+//	}
+
 	public Double calcularImporte() {
 		//return cantidad.doubleValue() * producto.GetPrecio();
 		return cantidad.doubleValue() * producto.getPrecio();

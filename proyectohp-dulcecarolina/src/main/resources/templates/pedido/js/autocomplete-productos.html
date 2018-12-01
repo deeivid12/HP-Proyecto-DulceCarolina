@@ -32,7 +32,7 @@
 						return false;
 					}
 					
-					var linea = $("#plantillaItemsFactura").html(); //html obtiene el contenido html del elemento indicado
+					var linea = $("#plantillaItemsPedido").html(); //html obtiene el contenido html del elemento indicado
 					
 					//reemplazamos el parametro id nombre precio por el valor
 					linea = linea.replace(/{ID}/g, ui.item.value);
@@ -45,11 +45,16 @@
 					return false;
 				}
 			});
+			$("form").submit(function(){
+				$("#plantillaItemsPedido").remove(); //se debe eliminar la plantilla al hacer submit del formulario para que no tiree
+				return;
+			});
 		});
 		
 		var itemsHelper = {
 				calcularImporte: function(id, precio, cantidad) {
 					$("#total_importe_" + id).html(parseFloat(precio) * parseFloat(cantidad));
+					this.calcularGranTotal();
 				},
 				
 				hasProducto: function(id){
@@ -70,6 +75,18 @@
 				
 				eliminarLineaPedido: function(id){
 					$("#row_" + id).remove();
+					this.calcularGranTotal();
+				},
+				
+				calcularGranTotal: function(){
+					var total = 0;
+					
+					$('span[id^="total_importe_"]').each(function(){ //el sombrero es para que busque en todos los span que de este tipo
+						
+						total += parseFloat($(this).html());
+					});
+					
+					$('#gran_total').html(total); //asigno el total al id correspondiente
 				}
 		} //objeto con algunos metodos de ayuda
 	</script>

@@ -58,8 +58,8 @@ public class Pedido implements Serializable{
 	@JoinColumn(name="id_cli")
 	private Cliente cliente;
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="id_ped") //importantisimo generar la llave foranea id_ped en la tabla pedidoproductos
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pedido", cascade=CascadeType.ALL)
+//	@JoinColumn(name="id_ped") //importantisimo generar la llave foranea id_ped en la tabla pedidoproductos
 	private List<ItemPedido> productos;
 	
 	public Cliente getCliente() {
@@ -134,15 +134,6 @@ public class Pedido implements Serializable{
 	public void addProductoPedido(ItemPedido producto) {
 		this.productos.add(producto);
 	}
-	/*
-	public Long getId_cli() {
-		return id_cli;
-	}
-
-	public void setId_cli(Long id_cli) {
-		this.id_cli = id_cli;
-	}
-	*/
 	
 	public Double getTotal() {
 		Double total = 0.0;

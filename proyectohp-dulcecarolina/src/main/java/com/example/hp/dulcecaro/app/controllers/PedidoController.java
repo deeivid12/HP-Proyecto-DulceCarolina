@@ -68,7 +68,7 @@ public class PedidoController {
 			ItemPedido linea = new ItemPedido();
 			linea.setCantidad(cantidad[i]);
 			linea.setProducto(producto);
-//			linea.setPedido(pedido);
+			linea.setPedido(pedido);
 			pedido.addProductoPedido(linea);
 		}
 		

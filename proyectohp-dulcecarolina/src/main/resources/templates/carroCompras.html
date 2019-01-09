@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+	<p></p>
+
+
+	<h2 th:text="${titulo}"></h2>
+	<p></p>
+	
+	<form th:action="@{/carroCompras}" th:object="${items}" method="post">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tipo</th>
+					<th>Nombre</th>
+					<th>Descripci&oacute;n</th>
+					<th>Cantidad</th>	
+					<th>Importe</th>
+					<th>Total</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  th:each="i: ${items}">
+					<td th:text="${i.producto.id}"></td>
+					<td th:text="${i.producto.tipo}"></td>
+					<td th:text="${i.producto.nom}"></td>
+					<td th:text="${i.producto.dsc}"></td>
+					<td th:text="${i.cantidad}"></td>
+					<td th:text="${i.importe}"></td>
+					
+				<!-- 	<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td> -->
+				<!-- 	<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>  -->
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		
+	</form>
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

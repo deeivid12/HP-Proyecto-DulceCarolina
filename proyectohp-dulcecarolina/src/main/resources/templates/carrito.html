@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+
+</head>
+<body>
+	
+		
+
+		<header th:replace="layout/layout :: header"></header>
+
+<form th:action="@{/carrito}" id="form" method="post">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+					<h1 th:text="${titulo}"></h1>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Tipo</th>
+								<th>Nombre</th>
+								<th>Descripci&oacute;n</th>
+								<th>Cantidad de porciones</th>
+								<th>Calor&iacute;as por Porci&oacute;n</th>
+								<th>Cabrohidratos por Porci&oacute;n</th>
+								<th>Fibras por Porci&oacute;n</th>
+								<th>Editar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="producto: ${productos}">
+								<td th:text="${producto.id}"></td>
+								<!-- llama al metodo get -->
+								<td th:text="${producto.tipo}" id="tipo"></td>
+								<td th:text="${producto.nom}"></td>
+								<td th:text="${producto.dsc}"></td>
+								<td th:text="${producto.canPor}"></td>
+								<td th:text="${producto.calPorPorc}"></td>
+								<td th:text="${producto.hdcPorPorc}"></td>
+								<td th:text="${producto.fibPorPorc}"></td>
+								<td><button type="button"
+										class="addButton btn-primary btn-xs" th:text="agregar"
+										th:id="${producto.id}" th:name="${producto.nom}" precio="50"></button></td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<h2>Carrito</h2>
+				<!-- Elementos del carrito -->
+				<ul id="carrito" class="list-group"></ul>
+				<hr></hr>
+
+				<!-- Precio total -->
+				<p class="text-right">
+					Total: <span id="total"></span>&euro;
+				</p>
+
+				<input type="submit" value="Confirmar" id="confirmaCarrito"
+					class="btn btn-crear"></input>
+			</div>
+		</div>
+
+
+		<footer th:replace="layout/layout :: footer"></footer>
+</form>	
+</body>
+
+<script>
+	$(document).ready(function() {
+
+		let i = 0;
+		$(".addButton").click(function() {
+
+			var miNodo = $("<li></li>");
+			var miProd = $("<span></span>")
+			var miCant = $("<input></input>");
+			var miPrecio = $("<span></span>");
+
+			miNodo.attr("posicion", i);
+			miNodo.attr("class", "nodo list-group-item text-right");
+
+			miProd.attr("name", "prod");
+			miProd.attr("idProd", $(this).attr("id"));
+			miProd.text($(this).attr("name"));
+
+			miCant.attr("idCant", $(this).attr("id"));
+			miCant.attr("type", "number");
+			miCant.attr("class", "cant");
+			miCant.attr("value", 1);
+			miCant.attr("name", "cant");
+
+			miPrecio.attr("idPrecio", $(this).attr("id"));
+
+			miPrecio.text($(this).attr("precio"));
+
+			miNodo.append(miProd);
+			miNodo.append(miCant);
+			miNodo.append(miPrecio);
+			$("#carrito").append(miNodo);
+			i = i + 1;
+
+		});
+
+		$("#confirmaCarrito").click(function(event) {
+
+			//data["id"] = $(".nodo").attr("idNodo");
+			//data["id"] = 5;
+			//data["cant"] = $(".cant").attr("value");
+
+			//var prod = $("prod").attr("idProd");
+			//var cant = $(".cant").val();
+			//var data = idProd.concat(",", cant);
+
+			var data = {
+				"x" : 100,
+				"y" : 200
+			};
+
+			$.ajax({
+				type : "POST",
+				contentType : "application/json; charset=UTF-8",
+				url : "/carrito",
+				data : JSON.stringify(data),
+				dataType : "json",
+				success : function(data) {
+
+					if (data == "SUCCESS") {
+						alert(data);
+					} else {
+						alert(data);
+					}
+
+				}
+			// timeout: 600000,
+			//async : true,
+
+			});
+
+			event.preventDefault();
+			
+			window.location.href = "/verPedido"; //NOS LLEVA A LA CONFIRMACION DEL PEDIDO
+
+		});
+
+	});
+</script>
+
+
+</html>

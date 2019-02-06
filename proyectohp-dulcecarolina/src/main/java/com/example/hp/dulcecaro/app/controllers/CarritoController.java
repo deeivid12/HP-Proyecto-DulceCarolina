@@ -20,6 +20,7 @@ import com.example.hp.dulcecaro.app.models.entity.Pedido;
 import com.example.hp.dulcecaro.app.models.entity.ProdAJAX;
 import com.example.hp.dulcecaro.app.models.entity.Producto;
 import com.example.hp.dulcecaro.app.models.entity.Usuario;
+import com.example.hp.dulcecaro.app.models.service.IItemPedidoService;
 import com.example.hp.dulcecaro.app.models.service.IPedidoService;
 import com.example.hp.dulcecaro.app.models.service.IProductoService;
 import com.example.hp.dulcecaro.app.models.service.UsuarioServiceImpl;
@@ -34,6 +35,9 @@ public class CarritoController {
 	
 	@Autowired
 	private IPedidoService pedidoService;
+	
+	@Autowired
+	private IItemPedidoService itemPedidoService;
 	
 	@Autowired
 	private UsuarioServiceImpl uService;
@@ -80,6 +84,14 @@ public class CarritoController {
 		 
 		
 		model.put("productos", productoService.findAll());
+		Pedido pedido = new Pedido();
+		Usuario uActual = new Usuario();
+		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		uActual.getCliente().addPedido(pedido);
+		
+		pedido.setCliente(uActual.getCliente());
+		
+		pedidoService.savePedido(pedido);
 		
 		return "carrito";
 		
@@ -96,28 +108,51 @@ public class CarritoController {
 		System.out.println("X: " + prod.getX()); //solo para probar que realmente se pasan datos con ajax
 		System.out.println("Y: " + prod.getY());
 		
-		/* CON ESTO SE INTENTA CREAR UN PEDIDO! FALTAN DETALLES EN EL CONTROLADOR PEDIDOS
+		
 		
 		ItemPedido itemPedido = new ItemPedido();
 		
-		Producto producto = productoService.findOne((long) 1);
+		Producto producto = productoService.findOne((long) 1); //busco info dle producto.
+		
+		System.out.println(producto.getNom());
+		
+		
 		
 		Pedido pedido = new Pedido();
 		
-		itemPedido.setProducto(producto);
-		itemPedido.setCantidad(prod.getY());
-		itemPedido.setImporte(10.00);
 		
-		pedido.addProductoPedido(itemPedido);
+		
+		
+		
 		
 		
 		Usuario uActual = new Usuario();
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1);
+		
+		
+		itemPedido.setPedido(pedido);
+		itemPedido.setProducto(producto);
+		itemPedido.setCantidad(prod.getY());
+		itemPedido.setImporte(10.00);
+		pedido.addProductoPedido(itemPedido);
+		itemPedido.setPedido(pedido);
+		
+		System.out.println(uActual.getUsername());
+		System.out.println(pedido.getId());
+		
+		
+		
 		uActual.getCliente().addPedido(pedido);
 		
 		pedido.setCliente(uActual.getCliente());
 		
-		pedidoService.save(pedido);
+		
+		itemPedidoService.save(itemPedido);
+		//pedidoService.savePedido(pedido);
+		
+		/* CON ESTO SE INTENTA CREAR UN PEDIDO! FALTAN DETALLES EN EL CONTROLADOR PEDIDOS
 		
 		*/
 		

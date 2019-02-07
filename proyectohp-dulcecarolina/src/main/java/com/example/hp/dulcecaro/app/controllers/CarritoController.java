@@ -91,7 +91,7 @@ public class CarritoController {
 		
 		pedido.setCliente(uActual.getCliente());
 		
-		pedidoService.savePedido(pedido);
+		pedidoService.savePedido(pedido);//creo un pedido para despues poder tomar su id
 		
 		return "carrito";
 		
@@ -110,51 +110,28 @@ public class CarritoController {
 		
 		
 		
-		ItemPedido itemPedido = new ItemPedido();
-		
-		Producto producto = productoService.findOne((long) 1); //busco info dle producto.
-		
-		System.out.println(producto.getNom());
 		
 		
-		
+		Producto producto = productoService.findOne((long) 1); //busco info del producto.
+				
 		Pedido pedido = new Pedido();
-		
-		
-		
-		
-		
-		
-		
 		Usuario uActual = new Usuario();
-		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()); //traigo el usuario logueado
+		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1); //traigo el pedido que registre primero, para poder tener un id del mismo y asi guardar los items
 		
-		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1);
-		
-		
+		ItemPedido itemPedido = new ItemPedido(pedido.getId(), producto.getId()); //creo item pedido con datos correspondientes a pedido y producto
 		itemPedido.setPedido(pedido);
 		itemPedido.setProducto(producto);
 		itemPedido.setCantidad(prod.getY());
 		itemPedido.setImporte(10.00);
 		pedido.addProductoPedido(itemPedido);
 		itemPedido.setPedido(pedido);
-		
-		System.out.println(uActual.getUsername());
-		System.out.println(pedido.getId());
-		
-		
-		
+				
 		uActual.getCliente().addPedido(pedido);
 		
 		pedido.setCliente(uActual.getCliente());
 		
-		
-		itemPedidoService.save(itemPedido);
-		//pedidoService.savePedido(pedido);
-		
-		/* CON ESTO SE INTENTA CREAR UN PEDIDO! FALTAN DETALLES EN EL CONTROLADOR PEDIDOS
-		
-		*/
+		pedidoService.savePedido(pedido); //guardo pedido
 		
 		return "";
     }

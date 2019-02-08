@@ -41,6 +41,28 @@ public class ItemPedido implements Serializable {
 		//return cantidad.doubleValue() * producto.GetPrecio();
 		return cantidad.doubleValue() * producto.getPrecio();
 	}
+	
+	public ItemPedido() {
+		
+	}
+	
+	public ItemPedido(Long id, Long id_pro) {
+		itemPedidoPK = new ItemPedidoPK(id, id_pro);
+	}
+	
+	
+
+	public ItemPedidoPK getItemPedidoPK() {
+		return itemPedidoPK;
+	}
+
+
+
+	public void setItemPedidoPK(ItemPedidoPK itemPedidoPK) {
+		this.itemPedidoPK = itemPedidoPK;
+	}
+
+
 
 	public Pedido getPedido() {
 		return pedido;

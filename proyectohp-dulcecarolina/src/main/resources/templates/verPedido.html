@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar</a></p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tipo</th>
+					<th>Nombre</th>
+					<th>Descripci&oacute;n</th>
+					<th>Cantidad de porciones</th>
+					<th>Calor&iacute;as por Porci&oacute;n</th>
+					<th>Cabrohidratos por Porci&oacute;n</th>
+					<th>Fibras por Porci&oacute;n</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr  th:each="item: ${items}">
+					<td th:text="${item.cantidad}"></td> <!-- llama al metodo get -->
+					
+					<td><a class="btn btn-primary btn-xs" th:href="" th:text="editar"></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

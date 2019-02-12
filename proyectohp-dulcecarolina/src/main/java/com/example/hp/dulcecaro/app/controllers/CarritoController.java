@@ -102,30 +102,44 @@ public class CarritoController {
 	        consumes = {"application/json", MediaType.APPLICATION_FORM_URLENCODED_VALUE}, 
 	        produces = "application/json")
 	        //produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody String confirmaCarrito(@RequestBody ProdAJAX prod) { //puede llevar @ResponseBody, si no funciona. idem con @RequestBody en ProdAJAX
+    public @ResponseBody String confirmaCarrito(@RequestBody List<ProdAJAX> prod) { //puede llevar @ResponseBody, si no funciona. idem con @RequestBody en ProdAJAX
         
 		
-		System.out.println("X: " + prod.getX()); //solo para probar que realmente se pasan datos con ajax
-		System.out.println("Y: " + prod.getY());
+		//System.out.println("X: " + prod.getX()); //solo para probar que realmente se pasan datos con ajax
+		//System.out.println("Y: " + prod.getY());
 		
 		
-		
-		
-		
-		Producto producto = productoService.findOne((long) 1); //busco info del producto.
-				
 		Pedido pedido = new Pedido();
 		Usuario uActual = new Usuario();
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()); //traigo el usuario logueado
 		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1); //traigo el pedido que registre primero, para poder tener un id del mismo y asi guardar los items
 		
-		ItemPedido itemPedido = new ItemPedido(pedido.getId(), producto.getId()); //creo item pedido con datos correspondientes a pedido y producto
-		itemPedido.setPedido(pedido);
-		itemPedido.setProducto(producto);
-		itemPedido.setCantidad(prod.getY());
-		itemPedido.setImporte(10.00);
-		pedido.addProductoPedido(itemPedido);
-		itemPedido.setPedido(pedido);
+		/*
+		
+		for (ProdAJAX p : prod) {
+			
+			System.out.println("ID: " + p.getId());
+			System.out.println("Cantidad" + p.getCantidad());
+			
+		} */
+		
+	
+		
+		for (ProdAJAX p : prod) {
+			
+			Producto producto = productoService.findOne(p.getId()); //busco info del producto.
+			ItemPedido itemPedido = new ItemPedido(pedido.getId(), producto.getId()); //creo item pedido con datos correspondientes a pedido y producto
+			itemPedido.setPedido(pedido);
+			itemPedido.setProducto(producto);
+			itemPedido.setCantidad(p.getCantidad());
+			itemPedido.setImporte(10.00); //por ahora se hace manual!
+			pedido.addProductoPedido(itemPedido);
+			itemPedido.setPedido(pedido);
+			
+			
+		}
+		
+			
 				
 		uActual.getCliente().addPedido(pedido);
 		

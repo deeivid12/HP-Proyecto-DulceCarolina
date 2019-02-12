@@ -74,6 +74,7 @@
 </body>
 
 <script>
+/*<![CDATA[*/
 	$(document).ready(function() {
 
 		let i = 0;
@@ -87,17 +88,20 @@
 			miNodo.attr("posicion", i);
 			miNodo.attr("class", "nodo list-group-item text-right");
 
-			miProd.attr("name", "prod");
+			miProd.attr("class", "prod");
 			miProd.attr("idProd", $(this).attr("id"));
+			miProd.attr("posicion", i);
 			miProd.text($(this).attr("name"));
 
 			miCant.attr("idCant", $(this).attr("id"));
+			miCant.attr("posicion", i);
 			miCant.attr("type", "number");
 			miCant.attr("class", "cant");
 			miCant.attr("value", 1);
 			miCant.attr("name", "cant");
 
 			miPrecio.attr("idPrecio", $(this).attr("id"));
+			miPrecio.attr("posicion", i);
 
 			miPrecio.text($(this).attr("precio"));
 
@@ -111,18 +115,48 @@
 
 		$("#confirmaCarrito").click(function(event) {
 
-			//data["id"] = $(".nodo").attr("idNodo");
-			//data["id"] = 5;
-			//data["cant"] = $(".cant").attr("value");
-
-			//var prod = $("prod").attr("idProd");
-			//var cant = $(".cant").val();
-			//var data = idProd.concat(",", cant);
-
-			var data = {
-				"x" : 100,
-				"y" : 200
-			};
+			var data = [];
+			
+			var $prods = $(".prod");
+			var $cants = $(".cant");
+			
+			for (var i=0; i < $prods.length; i++){
+				
+				var dataActual = {
+						id : $prods[i].getAttribute("idProd"),
+						cantidad : $cants[i].value
+				}
+				
+				// Merge object2 into object1
+				data.push(dataActual);
+				
+				};
+			
+				console.log(data);
+				
+			
+			
+			//console.log($prods.length);
+			//console.log($prods[0].getAttribute("idProd"));
+			
+			
+			
+			
+			
+			
+			
+			//var data = [{
+					
+			//		id : $(".prod").attr("idProd"),
+			//		cantidad : $(".cant").val()
+					
+			//},
+			//{
+			//	id : 0,
+			//	cantidad : 0
+			//}];
+			
+			
 
 			$.ajax({
 				type : "POST",
@@ -151,6 +185,7 @@
 		});
 
 	});
+	/*]]>*/
 </script>
 
 

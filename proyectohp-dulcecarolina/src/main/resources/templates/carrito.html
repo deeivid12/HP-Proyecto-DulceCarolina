@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head">
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
+
+
+
+	
 
 
 </head>
 <body>
-	
-		
 
-		<header th:replace="layout/layout :: header"></header>
 
-<form th:action="@{/carrito}" id="form" method="post">
 
-		<div class="container">
+	<header th:replace="layout/layout :: header"></header>
+
+	<form th:action="@{/carrito}" id="form" method="post">
+
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-8">
-					<h1 th:text="${titulo}"></h1>
-
+				<div class="col-9">
+					<h1></h1>
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Tipo</th>
 								<th>Nombre</th>
-								<th>Descripci&oacute;n</th>
-								<th>Cantidad de porciones</th>
-								<th>Calor&iacute;as por Porci&oacute;n</th>
-								<th>Cabrohidratos por Porci&oacute;n</th>
-								<th>Fibras por Porci&oacute;n</th>
-								<th>Editar</th>
-								<th>Eliminar</th>
+								<th>Tipo</th>
+								<th>Porciones</th>
+								<th>Calor&iacute;as/Porci&oacute;n</th>
+								<th>Carbohidratos/Porci&oacute;n</th>
+								<th>Fibras/Porci&oacute;n</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="producto: ${productos}">
 								<td th:text="${producto.id}"></td>
-								<!-- llama al metodo get -->
-								<td th:text="${producto.tipo}" id="tipo"></td>
 								<td th:text="${producto.nom}"></td>
-								<td th:text="${producto.dsc}"></td>
+								<td th:text="${producto.tipo}" id="tipo"></td>
 								<td th:text="${producto.canPor}"></td>
 								<td th:text="${producto.calPorPorc}"></td>
 								<td th:text="${producto.hdcPorPorc}"></td>
@@ -51,42 +52,79 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
-			<div class="col-sm-4">
-				<h2>Carrito</h2>
-				<!-- Elementos del carrito -->
-				<ul id="carrito" class="list-group"></ul>
-				<hr></hr>
+				<div class="col-3">
+					<h2>Carrito</h2>
+					
+					<!-- Elementos del carrito -->
+					<div id="carrito" class="row list-group">
+					<div class="row">
+						<div class="col-5"><h6>Producto</h6></div>
+						<div class="col-3"><h6>Cantidad</h6></div>
+						<div class="col-4"><h6>Precio</h6></div>
+						<hr></hr>
+					</div>
+					</div>
+					<hr></hr>
 
-				<!-- Precio total -->
-				<p class="text-right">
-					Total: <span id="total"></span>&euro;
-				</p>
+					<!-- Precio total -->
+					<p class="text-right">
+						Total: <span id="total"></span>&euro;
+					</p>
 
-				<input type="submit" value="Confirmar" id="confirmaCarrito"
-					class="btn btn-crear"></input>
+					<input type="submit" value="Confirmar" id="confirmaCarrito"
+						class="btn btn-crear"></input>
+				</div>
 			</div>
 		</div>
 
 
+<!-- .modal -->
+<div class="modal fade" id="Mymodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button> 
+				<h4 class="modal-title">Atención</h4>                                                             
+			</div> 
+			<div class="modal-body">
+				Estamos cargando su pedido. Gracias por su compra.
+			</div>   
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                               
+			</div>
+		</div>                                                                       
+	</div>                                          
+</div>
+			
+
+
+
+
+
 		<footer th:replace="layout/layout :: footer"></footer>
-</form>	
+	</form>
 </body>
 
 <script>
-/*<![CDATA[*/
+	/*<![CDATA[*/
 	$(document).ready(function() {
 
 		let i = 0;
 		$(".addButton").click(function() {
 
-			var miNodo = $("<li></li>");
+			
+			
+			var col1 = $("<div class='col-sm-5'></div>");
+			var col2 = $("<div class='col-sm-3'></div>");
+			var col3 = $("<div class='col-sm-4'></div>");
+			
+			var miNodo = $("<div class='row nodo'></div>");
 			var miProd = $("<span></span>")
 			var miCant = $("<input></input>");
 			var miPrecio = $("<span></span>");
 
 			miNodo.attr("posicion", i);
-			miNodo.attr("class", "nodo list-group-item text-right");
+			//miNodo.attr("class", "nodo");
 
 			miProd.attr("class", "prod");
 			miProd.attr("idProd", $(this).attr("id"));
@@ -96,7 +134,7 @@
 			miCant.attr("idCant", $(this).attr("id"));
 			miCant.attr("posicion", i);
 			miCant.attr("type", "number");
-			miCant.attr("class", "cant");
+			miCant.attr("class", "input-cant cant");
 			miCant.attr("value", 1);
 			miCant.attr("name", "cant");
 
@@ -105,58 +143,48 @@
 
 			miPrecio.text($(this).attr("precio"));
 
-			miNodo.append(miProd);
-			miNodo.append(miCant);
-			miNodo.append(miPrecio);
+			col1.append(miProd);
+			col2.append(miCant);
+			col3.append(miPrecio);
+			
+			miNodo.append(col1);
+			miNodo.append(col2);
+			miNodo.append(col3);
+			
+			
+
 			$("#carrito").append(miNodo);
 			i = i + 1;
+			
+			this.disabled = true;
 
 		});
 
 		$("#confirmaCarrito").click(function(event) {
 
 			var data = [];
+
 			
 			var $prods = $(".prod");
 			var $cants = $(".cant");
 			
-			for (var i=0; i < $prods.length; i++){
-				
+			console.log($prods);
+
+			for (var i = 0; i < $prods.length; i++) {
+
 				var dataActual = {
-						id : $prods[i].getAttribute("idProd"),
-						cantidad : $cants[i].value
+					id : $prods[i].getAttribute("idProd"),
+					cantidad : $cants[i].value
 				}
-				
-				// Merge object2 into object1
+
 				data.push(dataActual);
-				
-				};
-			
-				console.log(data);
-				
-			
-			
-			//console.log($prods.length);
-			//console.log($prods[0].getAttribute("idProd"));
-			
-			
-			
-			
-			
-			
-			
-			//var data = [{
-					
-			//		id : $(".prod").attr("idProd"),
-			//		cantidad : $(".cant").val()
-					
-			//},
-			//{
-			//	id : 0,
-			//	cantidad : 0
-			//}];
-			
-			
+
+			}
+			;
+
+			console.log(data);
+
+			//envio de datos mediante AJAX
 
 			$.ajax({
 				type : "POST",
@@ -180,7 +208,20 @@
 
 			event.preventDefault();
 			
-			window.location.href = "/verPedido"; //NOS LLEVA A LA CONFIRMACION DEL PEDIDO
+			
+			
+		  	$("#Mymodal").modal("show");
+		  		
+		  	setTimeout(function(){
+		    window.location.href = "/verPedido";
+		    }, 4000);		  		
+		  		
+			
+			
+		
+			
+			
+			//window.location.href = "/verPedido"; //NOS LLEVA A LA CONFIRMACION DEL PEDIDO
 
 		});
 

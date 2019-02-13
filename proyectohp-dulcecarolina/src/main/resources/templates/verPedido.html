@@ -2,35 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"></head>
 <body>
+
+
+
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container">
-		<h1 th:text="${titulo}"></h1>
-		<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar</a></p>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Tipo</th>
-					<th>Nombre</th>
-					<th>Descripci&oacute;n</th>
-					<th>Cantidad de porciones</th>
-					<th>Calor&iacute;as por Porci&oacute;n</th>
-					<th>Cabrohidratos por Porci&oacute;n</th>
-					<th>Fibras por Porci&oacute;n</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr  th:each="item: ${items}">
-					<td th:text="${item.cantidad}"></td> <!-- llama al metodo get -->
+
+	<form th:action="@{/verPedido}" id="form" method="post">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-9">
+					<h1>Resumen Pedido</h1>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Cantidad</th>
+								<th>Importe</th>
+								<th>Subtotal</th>
+								<th></th>
+								<th>Total</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="item: ${items}">
+								<td th:text="${item.producto.id}"></td>
+								<td th:text="${item.producto.nom}"></td>
+								<td th:text="${item.producto.tipo}" id="tipo"></td>
+								<td th:text="${item.cantidad}"></td>
+								<td th:text="${item.importe}"></td>
+								<td th:text="${item.importe} * ${item.cantidad}"></td>
+								<td></td>
+
+							</tr>
+						</tbody>
+					</table>
 					
-					<td><a class="btn btn-primary btn-xs" th:href="" th:text="editar"></a></td>
-					<td><a class="btn btn-danger btn-xs" th:href="" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-<footer th:replace="layout/layout :: footer"></footer>
+					<div class="row">
+						<div class="col-7"></div>
+						<div class="col-5">
+							<a class="btn btn-primary btn-xs" th:href="@{/home/}">Volver a Inicio </a>
+							<a class="btn btn-primary btn-xs" th:href="@{/carrito/}">Nuevo Pedido</a>
+						</div>
+					
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<footer th:replace="layout/layout :: footer"></footer>
+	</form>
 </body>
 </html>

@@ -153,7 +153,7 @@ public class CarritoController {
 	@RequestMapping (value="/verPedido", method=RequestMethod.GET)
 	public String verPedido(Map<String, Object> model) {
 		 
-		/* UNA VEZ SE CREO EL PEDIDO, CON ESTA PETICION SE CONFIRMA EL MISMO.
+		
 		
 		Usuario uActual = new Usuario();
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -162,17 +162,14 @@ public class CarritoController {
 		Pedido pedActual = new Pedido();
 		List<ItemPedido> items = new ArrayList<ItemPedido>();
 		
-		pedActual = pedidos.get(pedidos.size());
+		pedActual = pedidos.get(pedidos.size()-1);
 		items = pedActual.getProductos();
-		
-		
-		
-		
+				
 		
 		model.put("pedido", pedActual);
 		model.put("items", items);
 		
-		
+		/* UNA VEZ SE CREO EL PEDIDO, CON ESTA PETICION SE CONFIRMA EL MISMO.
 		*/
 		
 		return "verPedido";

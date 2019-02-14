@@ -48,7 +48,7 @@
 								<td th:text="${producto.precio}"></td>
 								<td><button type="button"
 										class="addButton btn-primary btn-xs" th:text="agregar"
-										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}"></button></td>
+										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}, idprod=${producto.id}"></button></td>
 																	
 							</tr>
 						</tbody>
@@ -147,6 +147,7 @@
 			miCant.attr("name", "cant");
 
 			miPrecio.attr("idPrecio", $(this).attr("id"));
+			miPrecio.attr("class", "precio");
 			miPrecio.attr("posicion", i);
 
 			miPrecio.text($(this).attr("precio"));
@@ -168,18 +169,50 @@
 			
 			this.disabled = true;
 			
+			var $precios = $(".precio");
+			var $cants = $(".cant");
+			
+			for (var j = 0; j < $precios.length; j++) {
+
+				var total = $precios[j].innerHTML * $cants[j].value;
+				
+				$("#total").innerHTML = total;
+				
+				
+				console.log($precios[j].innerHTML);
+				console.log($cants[j].value);
+				console.log(total);
+				
+				};
+			
+			console.log(total);
+			
 			
 			$(".btnEliminar").click(function() {
 				
 				var pos = $(this).attr("posicion"); //obtengo posicion a borrar
-				var idbtn = $(this).attr("idbtn"); //obtengo posicion a borrar
+				var idbtn = $(this).attr("idbtn"); //obtengo id de boton add a habilitar
+				var botonadd = $(".addButton"); //obtengo todos los botones add para luego recorrer y habilitar nuevamente
 				
 				$(".nodo").find(`[posicion='${pos}']`).remove(); //borro la posicion requerida
 				
-				$(".addButton").find(`[id='${idbtn}']`).disabled = false; //borro la posicion requerida
+				//$(".addButton").find(`[idprod='${idbtn}']`).prop = ("disabled", false); // no funciono, se hace abajo
 				
+				//recorro todos los botones add para habilitar el correspondiente luego de eliminar cierta fila				
+				for (k=0; k<botonadd.length; k++){
+					
+					if (botonadd[k].getAttribute("id") === idbtn){
+						
+						console.log(botonadd[k]);
+						botonadd[k].disabled = false;
+						
+					};
+					
+				};
+				
+			
 			});
-
+			
 		});
 		
 			

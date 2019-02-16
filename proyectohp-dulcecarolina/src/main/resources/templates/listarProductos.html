@@ -22,6 +22,7 @@
 					<th>Calorías/Porción</th>
 					<th>Cabrohidratos/Porción</th>
 					<th>Fibras/Porción</th>
+					<th>Precio</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -38,11 +39,9 @@
 					<td th:text="${producto.calPorPorc}"></td>
 					<td th:text="${producto.hdcPorPorc}"></td>
 					<td th:text="${producto.fibPorPorc}"></td>
-					<td><a class="btn btn-primary btn-xs"
-						th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
-					<td><a class="btn btn-danger btn-xs"
-						th:href="@{/eliminarProducto/} + ${producto.id}"
-						th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
+					<td th:text="${producto.precio}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
 				</tr>
 			</tbody>
 		</table>

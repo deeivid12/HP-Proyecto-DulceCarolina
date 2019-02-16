@@ -25,21 +25,21 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Imagen</th>
+								<th></th>
 								<th>ID</th>
 								<th>Nombre</th>
 								<th>Tipo</th>
 								<th>Porciones</th>
-								<th>Calor&iacute;as/Porci&oacute;n</th>
-								<th>Carbohidratos/Porci&oacute;n</th>
-								<th>Fibras/Porci&oacute;n</th>
+								<th>Cal/Porc</th>
+								<th>Carbs/Porc</th>
+								<th>Fib/Porc</th>
 								<th>Precio</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="producto: ${productos}">
-								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded"
+								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded" style="width: 60%;"
 									th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
 								<td th:text="${producto.id}"></td>
 								<td th:text="${producto.nom}"></td>
@@ -50,8 +50,8 @@
 								<td th:text="${producto.fibPorPorc}"></td>
 								<td th:text="${producto.precio}"></td>
 								<td><button type="button"
-										class="addButton btn btn-xs" th:text="Agregar"
-										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}, idprod=${producto.id}"></button></td>
+										class="addButton btn btn-xs" 
+										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}, idprod=${producto.id}"><i class="fas fa-plus"></i></button></td>
 																	
 							</tr>
 						</tbody>
@@ -356,6 +356,12 @@
 			
 
 		$("#confirmaCarrito").click(function(event) {
+			
+			var rta = confirm("¿Confirmar pedido?");
+			
+			if (rta != false){
+				
+			
 
 			var data = [];
 
@@ -412,7 +418,7 @@
 		    }, 4000);		  		
 		  		
 			
-		
+			} else event.preventDefault();
 
 		});
 		

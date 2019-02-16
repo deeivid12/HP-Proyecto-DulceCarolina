@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8" />
+</head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -32,7 +34,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Descripci髇</label>
+				<label class="col-sm-2 col-form-label">Descripci贸n</label>
 				<div class="col-sm-4">
 					<input type="text" th:field="*{dsc}" class="form-control" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('dsc')}"
@@ -50,7 +52,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Calor韆s por Porci髇</label>
+				<label class="col-sm-2 col-form-label">Calor铆as por Porci贸n</label>
 				<div class="col-sm-4">
 					<input type="text" th:field="*{calPorPorc}" class="form-control" />
 					<small class="form-text text-danger"
@@ -60,7 +62,7 @@
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Hidratos de Carbono
-					por Porci髇</label>
+					por Porci贸n</label>
 				<div class="col-sm-4">
 					<input type="text" th:field="*{hdcPorPorc}" class="form-control" />
 					<small class="form-text text-danger"
@@ -69,7 +71,7 @@
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Fibras por Porci髇</label>
+				<label class="col-sm-2 col-form-label">Fibras por Porci贸n</label>
 				<div class="col-sm-4">
 					<input type="text" th:field="*{fibPorPorc}" class="form-control" />
 					<small class="form-text text-danger"

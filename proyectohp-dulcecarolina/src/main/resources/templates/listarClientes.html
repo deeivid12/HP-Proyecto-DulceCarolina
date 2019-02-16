@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8" />
+</head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
@@ -14,7 +16,7 @@
 					<th class="columna">Nombre</th>
 					<th class="columna">Apellido</th>
 					<th class="columna">Email</th>
-					<th class="columna">Correo</th>
+					<th class="columna">Teléfono</th>
 					<th class="columna">Direcci&oacute;n</th>
 					<th class="text-center columna">Editar</th>
 					<th class="text-center columna">Eliminar</th>
@@ -30,7 +32,7 @@
 					<td th:text="${cliente.tel}"></td>
 					<td th:text="${cliente.dir}"></td>
 					<td class="text-center"><a class="btn btn-xs"  th:href="@{/formCliente/} + ${cliente.id}"><i class="fas fa-edit"></i></a></td>
-					<td class="text-center"><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('Est�s seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
+					<td class="text-center"><a class="btn btn-xs"  th:href="@{/eliminarCliente/} + ${cliente.id}" onclick="return confirm('Estás seguro de que quieres eliminar el cliente?');"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			</tbody>
 		</table>

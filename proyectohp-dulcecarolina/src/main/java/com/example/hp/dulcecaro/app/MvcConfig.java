@@ -1,5 +1,6 @@
 package com.example.hp.dulcecaro.app;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -63,8 +64,13 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry arg0) {
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
+		
+		String resourcePath = Paths.get("uploads").toAbsolutePath().toUri().toString();
+		
+		registry.addResourceHandler("/uploads/**")
+		.addResourceLocations(resourcePath);
 		
 	}
 

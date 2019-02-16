@@ -25,6 +25,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
+								<th>Imagen</th>
 								<th>ID</th>
 								<th>Nombre</th>
 								<th>Tipo</th>
@@ -37,6 +38,8 @@
 						</thead>
 						<tbody>
 							<tr th:each="producto: ${productos}">
+								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded"
+									th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
 								<td th:text="${producto.id}"></td>
 								<td th:text="${producto.nom}"></td>
 								<td th:text="${producto.tipo}" id="tipo"></td>

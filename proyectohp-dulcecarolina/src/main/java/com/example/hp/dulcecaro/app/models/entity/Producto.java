@@ -51,6 +51,8 @@ public class Producto implements Serializable {
 	@Column(name = "pre_pro")
 	private Double precio;
 	
+	private String imagen;
+	
 	public Double getPrecio() {
 		return precio;
 	}
@@ -105,4 +107,12 @@ public class Producto implements Serializable {
 	public void setFibPorPorc(Double fibPorPorc) {
 		this.fibPorPorc = fibPorPorc;
 	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
+	
 }

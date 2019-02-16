@@ -47,7 +47,7 @@
 								<td th:text="${producto.fibPorPorc}"></td>
 								<td th:text="${producto.precio}"></td>
 								<td><button type="button"
-										class="addButton btn-primary btn-xs" th:text="agregar"
+										class="addButton btn btn-xs" th:text="Agregar"
 										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}, idprod=${producto.id}"></button></td>
 																	
 							</tr>
@@ -90,7 +90,7 @@
 				<h4 class="modal-title">Atención</h4>                                                             
 			</div> 
 			<div class="modal-body">
-				Estamos cargando su pedido. Gracias por su compra.
+				Estamos procesando su pedido. Gracias por su compra.
 			</div>   
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                               
@@ -114,7 +114,7 @@
 		
 		
 		//CODIGO PARA RECUPERAR CARRITO EN CASO DE HABER SESION ANTERIOR!
-		//localStorage.clear();
+		localStorage.clear();
 		
 		var storage = [];
 		storage = JSON.parse(localStorage.getItem("linea"));

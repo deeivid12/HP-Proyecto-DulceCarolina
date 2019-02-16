@@ -123,7 +123,7 @@ public class CarritoController {
 			
 		} */
 		
-	
+		double total = 0;
 		
 		for (ProdAJAX p : prod) {
 			
@@ -136,10 +136,11 @@ public class CarritoController {
 			pedido.addProductoPedido(itemPedido);
 			itemPedido.setPedido(pedido);
 			
-			
+			//voy calculando total
+			total = total + (p.getCantidad() * producto.getPrecio());			
 		}
 		
-			
+		pedido.setImporte(total);	
 				
 		uActual.getCliente().addPedido(pedido);
 		

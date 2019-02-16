@@ -24,7 +24,6 @@
 								<th>Subtotal</th>
 								<th></th>
 								<th>Total</th>
-								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,7 +35,17 @@
 								<td th:text="${item.importe}"></td>
 								<td th:text="${item.importe} * ${item.cantidad}"></td>
 								<td></td>
-
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td th:text="${pedido.importe}"></td>
 							</tr>
 						</tbody>
 					</table>

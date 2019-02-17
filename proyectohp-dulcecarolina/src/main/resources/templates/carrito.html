@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <link rel="stylesheet" th:href="@{/css/estilos.css}"></link>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
 
 
 	
@@ -12,6 +14,56 @@
 </head>
 <body>
 
+<script>
+/*<![CDATA[*/
+function busqueda() {
+	  // Declare variables
+	  var input, filter, $tr, nom, txtValue;
+	  input = document.getElementById('myInput');
+	  filter = input.value.toUpperCase();
+	  $tr = $("tr");
+	  console.log($tr);
+	  console.log($tr.length);
+	  console.log($tr[1].getAttribute("nomProd").toUpperCase());
+	 
+	
+	//Loop through all list items, and hide those who don't match the search query
+	  for (var i = 1; i < $tr.length; i++) {
+	    nom = $tr[i].getAttribute("nomProd");
+	    if (nom.toUpperCase().indexOf(filter) > -1) {
+	      $tr[i].style.display = "";
+	    } else {
+	      $tr[i].style.display = "none";
+	    }
+	  }
+	  
+
+};
+
+
+function filtro() {
+	
+	var seleccion, $tr, tipo, filter;
+	$tr = $("tr");
+	seleccion = $("#desplegable :selected").text();
+	filter = seleccion.toUpperCase();
+	console.log($("#desplegable"));
+	console.log(seleccion);
+	
+	 for (var i = 1; i < $tr.length; i++) {
+		    tipo = $tr[i].getAttribute("tipoProd");
+		    if (tipo.toUpperCase().indexOf(filter) > -1) {
+		      $tr[i].style.display = "";
+		    } else {
+		      $tr[i].style.display = "none";
+		    }
+		  }
+	
+	
+}
+/*]]>*/
+</script>
+
 
 
 	<header th:replace="layout/layout :: header"></header>
@@ -19,6 +71,21 @@
 	<form th:action="@{/carrito}" id="form" method="post">
 
 		<div class="container-fluid">
+		
+		<div class="row">
+			<div class="col-3">
+				<input type="text" id="myInput" onkeyup="busqueda()" placeholder="Buscar por nombre.."></input>
+			</div>
+			<div class="col-4">
+				<span>Filtrar por Tipo:  </span>
+				<select id="desplegable" onchange="filtro()">
+					<option>Todos</option>
+					<option>Tradicional</option>
+					<option>Saludable</option>
+				</select>
+			</div>
+		</div>
+			
 			<div class="row">
 				<div class="col-9">
 					<h1></h1>
@@ -38,7 +105,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="producto: ${productos}">
+							<tr th:each="producto: ${productos}" th:attr="idProd=${producto.id}, nomProd=${producto.nom}, tipoProd=${producto.tipo}">
 								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded" style="width: 60%;"
 									th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
 								<td th:text="${producto.id}"></td>
@@ -114,6 +181,11 @@
 <script>
 	/*<![CDATA[*/
 	$(document).ready(function() {
+		
+		
+		
+		
+		
 		
 		
 		//CODIGO PARA RECUPERAR CARRITO EN CASO DE HABER SESION ANTERIOR!

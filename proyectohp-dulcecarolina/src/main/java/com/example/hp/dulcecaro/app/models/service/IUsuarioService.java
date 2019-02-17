@@ -8,6 +8,10 @@ public interface IUsuarioService {
 	
 	Usuario registrarNuevoUsuario(UsuarioDTO cuentaDTO) throws UsuarioExisteException;
 	
+	public void delete(Long id);
+	
+	public Usuario findByUsername(String username);
+	
 	//despues hay que manejar error de mail
 
 }

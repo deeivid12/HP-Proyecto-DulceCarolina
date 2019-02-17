@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -65,8 +66,8 @@ public class Cliente implements Serializable { // implementar Serializable es bu
 		pedidos = new ArrayList<Pedido>();
 	}
 
-	@OneToOne //PARA LA RELACION USUARIO-CLIENTE!!
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade=CascadeType.ALL) //PARA LA RELACION USUARIO-CLIENTE!!
+	@JoinColumn(name="id")
 	private Usuario usuario;
 	
 	public Usuario getUsuario() {

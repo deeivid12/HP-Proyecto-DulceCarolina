@@ -119,6 +119,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		cliente.setEmail(usuario.getUsername());
 		cliente.setApe(cuentaDTO.getCliente().getApe());
 		cliente.setDir(cuentaDTO.getCliente().getDir());
+		cliente.setUsuario(usuario);
+		
+		cliente.getUsuario().setUsername(usuario.getUsername());
 		usuario.setCliente(cliente);
 		
 		return usuarioDao.save(usuario);
@@ -159,5 +162,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public String encriptar(String password) {
 		String passEncriptado = passwordEncoder.encode(password);
 		return passEncriptado;
+	}
+	
+	public void delete(Long id) {
+		
+		usuarioDao.delete(id);
 	}
 }

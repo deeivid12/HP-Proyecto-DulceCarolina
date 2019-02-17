@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.hp.dulcecaro.app.models.entity.Cliente;
+import com.example.hp.dulcecaro.app.models.entity.Usuario;
 import com.example.hp.dulcecaro.app.models.service.IClienteService;
+import com.example.hp.dulcecaro.app.models.service.IUsuarioService;
 
 @Controller //marca y configura la clase como un controlador
 @SessionAttributes("cliente") 
@@ -23,6 +25,9 @@ public class ClienteController {
 
 	@Autowired //con esta notacion va a buscar un componente registrado en el contenedor que implemente la interface ICLienteDao
 	private IClienteService clienteService; //atributo de clienteDao para poder realizar la consulta. Siempre se usa el tipo mas generico, en este caso de la interface
+	
+	@Autowired 
+	private IUsuarioService usuarioService;
 	
 	@RequestMapping(value="/listarClientes", method=RequestMethod.GET)  // indicar html
 	public String listar(Model model) { //clase model para pasar datos a la vista
@@ -60,9 +65,11 @@ public class ClienteController {
 	
 	@RequestMapping(value="/formCliente/{id}")
 	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) { 
-		Cliente cliente = null;
+		Cliente cliente = new Cliente();
 		if(id > 0) {
+			System.out.println("id: "+ id);
 			cliente = clienteService.findOne(id);
+			System.out.println("nombre: " + cliente.getNom());
 		} else {
 			return "redirect:/listarClientes";
 		}
@@ -74,6 +81,8 @@ public class ClienteController {
 	@RequestMapping(value="eliminarCliente/{id}")
 	public String eliminar(@PathVariable(value="id") Long id) {
 		if(id > 0) {
+			
+			
 			clienteService.delete(id);
 		} 
 		return "redirect:/listarClientes";

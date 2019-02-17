@@ -89,6 +89,7 @@ public class CarritoController {
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		uActual.getCliente().addPedido(pedido);
 		
+		pedido.setEstado("NC"); //no concretado
 		pedido.setCliente(uActual.getCliente());
 		
 		pedidoService.savePedido(pedido);//creo un pedido para despues poder tomar su id
@@ -140,6 +141,7 @@ public class CarritoController {
 			total = total + (p.getCantidad() * producto.getPrecio());			
 		}
 		
+		pedido.setEstado("P");//cuando se confirma, queda como pendiente!
 		pedido.setImporte(total);	
 				
 		uActual.getCliente().addPedido(pedido);

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<meta charset="UTF-8" />
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<p></p>
+
+
+		<h2 th:text="${titulo}"></h2>
+		<p></p>
+
+		<form th:action="@{/pedido/detallePedido}"  th:object="${pedido}"
+			method="post">
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Cliente</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.nom')}"
+						th:errors="*{cliente.nom}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Telefono</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{cliente.tel}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.tel')}"
+						th:errors="*{cliente.tel}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Direccion</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{cliente.dir}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.dir')}"
+						th:errors="*{cliente.dir}"></small>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Fecha Emision</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{fecEmi}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('fecEmi')}"
+						th:errors="*{fecEmi}"></small>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Estado</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{estado}" class="form-control" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('estado')}"
+						th:errors="*{estado}"></small><span>(Estados: P, E, C, R)</span><hr></hr>
+						<span>Referencias: P-Pendiente, E-En espera, C-Confirmado, R-Rechazado)</span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Importe</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{importe}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Fecha Entrega</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{fecEnt}" class="form-control" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small><span>(Formato: AAAA-MM-DD)</span>
+				</div>
+			</div>
+			
+			
+			<div class="container">
+			<div class="row">
+				<div class="col-9">
+					<h1>Detalle Pedido</h1>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Tipo</th>
+								<th>Cantidad</th>
+								<th>Importe</th>
+								<th>Subtotal</th>
+								<th></th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="item: ${items}">
+								<td th:text="${item.producto.id}"></td>
+								<td th:text="${item.producto.nom}"></td>
+								<td th:text="${item.producto.tipo}" id="tipo"></td>
+								<td th:text="${item.cantidad}"></td>
+								<td th:text="${item.importe}"></td>
+								<td th:text="${item.importe} * ${item.cantidad}"></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td th:text="${pedido.importe}"></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<div class="form-group row">
+					<label class="col-sm-2 col-form-label"></label>
+					<div class="col-sm-5 text-center">
+						<input type="submit" value="Confirmar" class="btn btn-crear" />
+					</div>
+				</div>
+					
+				</div>
+			</div>
+		</div>
+			
+
+			
+		</form>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

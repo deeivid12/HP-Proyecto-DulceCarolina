@@ -21,9 +21,11 @@ public class PedidoServiceImpl implements IPedidoService  {
 	private IProductoDao productoDao;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Pedido> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return (List<Pedido>) pedidoDao.findAll();
 	}
 
 	@Override
@@ -33,9 +35,10 @@ public class PedidoServiceImpl implements IPedidoService  {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Pedido findOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (Pedido) pedidoDao.findOne(id);
 	}
 
 	@Override

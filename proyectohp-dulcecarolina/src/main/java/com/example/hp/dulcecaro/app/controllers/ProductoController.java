@@ -1,6 +1,11 @@
 package com.example.hp.dulcecaro.app.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -11,8 +16,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.example.hp.dulcecaro.app.models.entity.Producto;
 import com.example.hp.dulcecaro.app.models.service.IProductoService;
 
@@ -53,12 +61,30 @@ public class ProductoController {
 	}
 	
 	@RequestMapping(value="/formProducto", method=RequestMethod.POST)
-	public String guardar(@Valid Producto producto, BindingResult result, Model model, SessionStatus status) {  //procesa el form
+	public String guardar(@Valid Producto producto, BindingResult result, Model model,@RequestParam("file") MultipartFile imagen, SessionStatus status) {  //procesa el form
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Producto");
 			return "formProducto";
 		}
+		
+		
+		if (!imagen.isEmpty()) {
+			
+			String uniqueFilename = UUID.randomUUID().toString() + "_" + imagen.getOriginalFilename();
+			Path rootPath = Paths.get("uploads").resolve(uniqueFilename);
+			Path rootAbsolutPath = rootPath.toAbsolutePath();
+			
+			try {
+				
+				Files.copy(imagen.getInputStream(), rootAbsolutPath);
+				producto.setImagen(uniqueFilename);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		};
 		
 		productoService.save(producto);
 		status.setComplete(); //elimina la sesion del producto

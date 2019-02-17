@@ -33,8 +33,8 @@ public class ClienteServiceImpl implements IClienteService {
 	@Override
 	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
-		clienteDao.findOne(id);
-		return null;
+		
+		return (Cliente) clienteDao.findOne(id);
 	}
 
 	@Override

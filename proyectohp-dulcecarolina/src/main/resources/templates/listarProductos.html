@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+	<meta charset="UTF-8" />
+</head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<h1 th:text="${titulo}"></h1>
-		<p><a th:href="@{/formProducto}" class="btn btn-default btn-xs">Agregar</a></p>
+		<p>
+			<a th:href="@{/formProducto}" class="btn btn-default btn-xs"><i class="fas fa-plus"></i></a>
+		</p>
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th></th>
 					<th>ID</th>
-					<th>Tipo</th>
 					<th>Nombre</th>
-					<th>Descripci&oacute;n</th>
-					<th>Cantidad de porciones</th>
-					<th>Calor&iacute;as por Porci&oacute;n</th>
-					<th>Cabrohidratos por Porci&oacute;n</th>
-					<th>Fibras por Porci&oacute;n</th>
+					<th>Descripción</th>
+					<th>Tipo</th>
+					<th>Porciones</th>
+					<th>Cal/Porc</th>
+					<th>Carbs/Porc</th>
+					<th>Fib/Porc</th>
 					<th>Precio</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr  th:each="producto: ${productos}">
-					<td th:text="${producto.id}"></td> <!-- llama al metodo get -->
-					<td th:text="${producto.tipo}"></td>
+				<tr th:each="producto: ${productos}">
+					<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded"
+						th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
+					<td th:text="${producto.id}"></td>
 					<td th:text="${producto.nom}"></td>
 					<td th:text="${producto.dsc}"></td>
+					<td th:text="${producto.tipo}"></td>
 					<td th:text="${producto.canPor}"></td>
 					<td th:text="${producto.calPorPorc}"></td>
 					<td th:text="${producto.hdcPorPorc}"></td>
 					<td th:text="${producto.fibPorPorc}"></td>
 					<td th:text="${producto.precio}"></td>
-					<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}" th:text="editar"></a></td>
-					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" th:text="eliminar" onclick="return confirm('Eliminar producto?')"></a></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/formProducto/} + ${producto.id}"><i class="fas fa-edit"></i></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${producto.id}" onclick="return confirm('Eliminar producto?')"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-<footer th:replace="layout/layout :: footer"></footer>
+	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

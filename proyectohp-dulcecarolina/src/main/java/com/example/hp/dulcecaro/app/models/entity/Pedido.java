@@ -85,7 +85,7 @@ public class Pedido implements Serializable{
 	@PrePersist //para que justo antes de persistir el pedido se asigne la fecha de creacion
 	public void prePersist() { //este metodo se encarga de generar la fecha
 		fecEmi = new Date();
-		estado = "P"; //Pendiente
+		//estado = "P"; //Pendiente
 	}
 	
 	@Column(name="obs_ped")
@@ -107,11 +107,11 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
-	public Date getFecRea() {
+	public Date getFecEmi() {
 		return fecEmi;
 	}
 
-	public void setFecRea(Date fecRea) {
+	public void setFecEmi(Date fecRea) {
 		this.fecEmi = fecRea;
 	}
 
@@ -144,4 +144,14 @@ public class Pedido implements Serializable{
 		}
 		return total;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
 }

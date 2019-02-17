@@ -9,7 +9,7 @@ public interface IPedidoService {
 	
 	public List<Pedido> findAll();
 	
-	public void save(Pedido pedido);
+	public void save(Pedido pedido); 
 	
 	public Pedido findOne(Long id);
 	

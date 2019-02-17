@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		<p>
+			
+		</p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Cliente</th>
+					<th>Fecha Emisión</th>
+					<th>Estado</th>
+					<th>Importe</th>
+					<th>Fecha Entrega</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pedido: ${pedidos}">
+					<td th:text="${pedido.id}"></td>
+					<td th:text="${pedido.cliente.nom}"></td>
+					<td th:text="${pedido.fecEmi}"></td>
+					<td th:text="${pedido.estado}"></td>
+					<td th:text="${pedido.importe}"></td>
+					<td th:text="${pedido.fecEnt}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/pedido/detallePedido/} + ${pedido.id}"><i class="fas fa-edit"></i></a></td>
+					<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarProducto/} + ${pedido.id}" onclick="return confirm('Eliminar producto?')"><i class="fas fa-trash-alt"></i></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

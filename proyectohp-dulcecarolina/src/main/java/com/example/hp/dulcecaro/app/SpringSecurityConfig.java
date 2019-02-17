@@ -29,8 +29,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
         http.headers().frameOptions().disable();
 		
-		http.authorizeRequests().antMatchers("/formMateriaPrima/**").hasAnyRole("ADMIN")
-		.antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**", "/h2-console/**", "/form**/**", "/registro", "/**", "/carroCompras").permitAll() //RUTAS PUBLICAS!!
+		http.authorizeRequests().antMatchers("/form**", "/pedido/**").hasAnyRole("ADMIN")
+		.antMatchers("/carrito").hasAnyRole("USER")
+		.antMatchers("/", "/listar**", "/css/**", "/imagenes/**", "/js/**", "/h2-console/**", "/registro", "/**").permitAll() //RUTAS PUBLICAS!!
 		.anyRequest().authenticated()
 		.and()
 			.formLogin().loginPage("/login")

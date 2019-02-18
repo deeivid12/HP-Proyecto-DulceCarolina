@@ -10,8 +10,10 @@ INSERT INTO materias_prima (id_mp, nom_mp, marca_mp, uni_med_mp, cal_uni_med_mp,
 INSERT INTO materias_prima (id_mp, nom_mp, marca_mp, uni_med_mp, cal_uni_med_mp, hdc_uni_med_mp, fib_uni_med_mp) VALUES(2, 'Dulce de leche', 'San Ignacio', 'gramo', 10, 20, 25);
 INSERT INTO materias_prima (id_mp, nom_mp, marca_mp, uni_med_mp, cal_uni_med_mp, hdc_uni_med_mp, fib_uni_med_mp) VALUES(3, 'Chocolate repostero', 'Aguila', 'gramo', 15, 30, 30);
 
-INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (1,'Tradicional','Pastafrola','Descripción del Producto 1',8,1,1,1,10.5, '');
-INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (2,'Saludable','Empanadas','Descripción del Producto 2',12,1,1,1,11.5, '');
+INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (1,'Tradicional','Pastafrola','Pastafrola de membrillo',8,30,35,50,180, '6ca3d0cf-6181-4bc3-809a-91758cacb4f8_pastafrola.jpg');
+INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (2,'Saludable','Empanadas','Empanadas al horno',12,50,60,40,250, '3b0b6893-96b9-4bd3-b88e-c5bf4538ee65_empanadas.jpeg');
+INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (3,'Tradicional','Alfajores','Alfajores con maicena',6,35,30,40,100, '290da5de-8898-4e1c-b63e-3778131b008e_alfajores.jpg');
+INSERT INTO productos (id_pro,tipo_pro,nom_pro,dsc_pro,can_por_pro,cal_porc_pro,hdc_porc_pro,fib_porc_pro,pre_pro, imagen) VALUES (4,'Saludable','Flan','Flan con chocolate',4,20,25,32,80, 'ffe48425-3783-41d6-afca-5ba13c6a1423_flan.jpg');
 
 /* Usuarios con sus roles */
 INSERT INTO usuarios (username, password, enabled, cliente_id) VALUES ('user','$2a$10$4nRLGo/n84lB9ebfS64xz.Nwo1Dy74/VkKmeldo8GUhIG8Z5hq4Ua',1,5);

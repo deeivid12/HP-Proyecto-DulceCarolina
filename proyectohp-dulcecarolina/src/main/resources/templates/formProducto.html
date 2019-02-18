@@ -18,7 +18,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Tipo</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{tipo}" class="form-control" /> <small
+					<input type="text" th:field="*{tipo}" required="true" class="form-control" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}"
 						th:errors="*{tipo}"></small>
 				</div>
@@ -27,7 +27,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{nom}" class="form-control" /> <small
+					<input type="text" th:field="*{nom}" required="true" class="form-control" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('nom')}"
 						th:errors="*{nom}"></small>
 				</div>
@@ -45,7 +45,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Cantidad de Porciones</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{canPor}" class="form-control" /> <small
+					<input type="number" min="1" required="true" th:field="*{canPor}" class="form-control" /> <small
 						class="form-text text-danger"
 						th:if="${#fields.hasErrors('canPor')}" th:errors="*{canPor}"></small>
 				</div>
@@ -54,7 +54,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Calorías por Porción</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{calPorPorc}" class="form-control" />
+					<input type="number" min="1" step="0.01" required="true" th:field="*{calPorPorc}" class="form-control" />
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('canPor')}" th:errors="*{calPorPorc}"></small>
 				</div>
@@ -64,7 +64,7 @@
 				<label class="col-sm-2 col-form-label">Hidratos de Carbono
 					por Porción</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{hdcPorPorc}" class="form-control" />
+					<input type="number" min="1" step="0.01" required="true" th:field="*{hdcPorPorc}" class="form-control" />
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('canPor')}" th:errors="*{hdcPorPorc}"></small>
 				</div>
@@ -73,7 +73,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fibras por Porción</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{fibPorPorc}" class="form-control" />
+					<input type="number" min="1" step="0.01" required="true" th:field="*{fibPorPorc}" class="form-control" />
 					<small class="form-text text-danger"
 						th:if="${#fields.hasErrors('canPor')}" th:errors="*{fibPorPorc}"></small>
 				</div>
@@ -89,7 +89,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Precio</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{precio}" class="form-control" /> <small
+					<input type="number" min="0" step="0.01" required="true" th:field="*{precio}" class="form-control" /> <small
 						class="form-text text-danger"
 						th:if="${#fields.hasErrors('canPor')}" th:errors="*{precio}"></small>
 				</div>

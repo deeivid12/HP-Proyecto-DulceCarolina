@@ -42,8 +42,10 @@ public class PedidoServiceImpl implements IPedidoService  {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
+		pedidoDao.delete(id);
 		
 	}
 

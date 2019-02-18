@@ -16,7 +16,7 @@
 			method="post">
 			
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Cliente</label>
+				<label class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-4">
 					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.nom')}"
@@ -25,9 +25,27 @@
 			</div>
 			
 			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Apellido</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{cliente.ape}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.ape')}"
+						th:errors="*{cliente.ape}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Email</label>
+				<div class="col-sm-4">
+					<input type="text" th:field="*{cliente.email}" class="form-control" readonly="true" /> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.email')}"
+						th:errors="*{cliente.email}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Telefono</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.tel}" class="form-control" readonly="true" /> <small
+					<input type="number" th:field="*{cliente.tel}" class="form-control" readonly="true" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.tel')}"
 						th:errors="*{cliente.tel}"></small>
 				</div>
@@ -45,7 +63,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Emision</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{fecEmi}" class="form-control" readonly="true" /> <small
+					<input type="date" th:field="*{fecEmi}" class="form-control" readonly="true" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('fecEmi')}"
 						th:errors="*{fecEmi}"></small>
 				</div>
@@ -54,7 +72,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Estado</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{estado}" class="form-control" /> <small
+					<input type="text" th:field="*{estado}" class="form-control" required="true" /> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('estado')}"
 						th:errors="*{estado}"></small><span>(Estados: P, E, C, R)</span><hr></hr>
 						<span>Referencias: P-Pendiente, E-En espera, C-Confirmado, R-Rechazado)</span>
@@ -73,9 +91,9 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Entrega</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{fecEnt}" class="form-control" /> <small
+					<input type="date" th:field="*{fecEnt}" class="form-control" /> <small
 						class="form-text text-danger"
-						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small><span>(Formato: AAAA-MM-DD)</span>
+						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small>
 				</div>
 			</div>
 			

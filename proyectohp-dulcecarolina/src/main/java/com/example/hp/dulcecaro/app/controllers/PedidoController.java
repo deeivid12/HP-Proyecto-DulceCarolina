@@ -140,6 +140,14 @@ public class PedidoController {
 		status.setComplete(); //con esto se elimina el objeto mPrima de la sesion.
 		return "redirect:/pedido/listarPedidos";
 	}
+	
+	@RequestMapping(value="/eliminarPedido/{id}")
+	public String eliminar(@PathVariable(value="id") Long id) {
+		if (id > 0) {
+			pedidoService.delete(id);
+		}
+		return "redirect:/pedido/listarPedidos";		
+	}
 		
 	
 }

@@ -35,7 +35,7 @@
 			<div class="form-group row">
 				<label class="col-sm-1 col-form-label">Tel&eacute;fono</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{tel}" class="form-control"/>
+					<input type="number" th:field="*{tel}" class="form-control"/>
 					<small class="form-text text-danger" th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}"></small>
 				</div>
 			</div>	

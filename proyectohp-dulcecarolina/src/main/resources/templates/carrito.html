@@ -51,12 +51,17 @@ function filtro() {
 	console.log(seleccion);
 	
 	 for (var i = 1; i < $tr.length; i++) {
-		    tipo = $tr[i].getAttribute("tipoProd");
-		    if (tipo.toUpperCase().indexOf(filter) > -1) {
-		      $tr[i].style.display = "";
-		    } else {
-		      $tr[i].style.display = "none";
-		    }
+		 
+		 	if (filter === "TODOS"){
+		 		$tr[i].style.display = "";
+		 	} else {		 
+			    tipo = $tr[i].getAttribute("tipoProd");
+			    if (tipo.toUpperCase().indexOf(filter) > -1) {
+			      $tr[i].style.display = "";
+			    } else {
+			      $tr[i].style.display = "none";
+			    }
+			 }
 		  }
 	
 	
@@ -92,29 +97,29 @@ function filtro() {
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th></th>
-								<th>ID</th>
-								<th>Nombre</th>
-								<th>Tipo</th>
-								<th>Porciones</th>
-								<th>Cal/Porc</th>
-								<th>Carbs/Porc</th>
-								<th>Fib/Porc</th>
-								<th>Precio</th>
-								<th></th>
+								<th class="col-2"></th>
+								<th class="col-1">Nombre</th>
+								<th class="col-1">Tipo</th>
+								<th class="col-2">Descripcion</th>
+								<th class="col-1">Porciones</th>
+								<th class="col-1">Calorías</th>
+								<th class="col-1">Carbs</th>
+								<th class="col-1">Fibras</th>
+								<th class="col-1">Precio ($)</th>
+								<th class="col-1"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="producto: ${productos}" th:attr="idProd=${producto.id}, nomProd=${producto.nom}, tipoProd=${producto.tipo}">
-								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded" style="width: 60%;"
+								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail img-rounded img-responsive" style="width: 70%;"
 									th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
-								<td th:text="${producto.id}"></td>
 								<td th:text="${producto.nom}"></td>
 								<td th:text="${producto.tipo}" id="tipo"></td>
+								<td th:text="${producto.dsc}"></td>
 								<td th:text="${producto.canPor}"></td>
-								<td th:text="${producto.calPorPorc}"></td>
-								<td th:text="${producto.hdcPorPorc}"></td>
-								<td th:text="${producto.fibPorPorc}"></td>
+								<td th:text="${producto.calPorPorc} * ${producto.canPor}"></td>
+								<td th:text="${producto.hdcPorPorc} * ${producto.canPor}"></td>
+								<td th:text="${producto.fibPorPorc} * ${producto.canPor}"></td>
 								<td th:text="${producto.precio}"></td>
 								<td><button type="button"
 										class="addButton btn btn-xs" 
@@ -297,6 +302,7 @@ function filtro() {
 
 			miCant.attr("idCant", $(this).attr("id"));
 			miCant.attr("posicion", i);
+			miCant.attr("min", 1);
 			miCant.attr("type", "number");
 			miCant.attr("class", "input-cant cant");
 			miCant.value = 1;
@@ -429,6 +435,10 @@ function filtro() {
 
 		$("#confirmaCarrito").click(function(event) {
 			
+			if ($(".prod").length > 0){
+			
+			console.log($(".prod").length);
+			
 			var rta = confirm("¿Confirmar pedido?");
 			
 			if (rta != false){
@@ -487,10 +497,14 @@ function filtro() {
 		  		
 		  	setTimeout(function(){
 		    window.location.href = "/verPedido";
-		    }, 4000);		  		
+		    }, 2500);		  		
 		  		
 			
 			} else event.preventDefault();
+			} else {
+						alert("Atención: Debe agregar uno o más productos a carrito.");
+						event.preventDefault();
+			}
 
 		});
 		
@@ -499,7 +513,7 @@ function filtro() {
 		
 		
 		
-		
+	
 		
 
 	});

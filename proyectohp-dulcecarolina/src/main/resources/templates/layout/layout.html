@@ -81,10 +81,10 @@
 					<li class="nav-item active"><a  class="nav-link" href="#">&nbsp;
 							Historia &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="#">&nbsp;
+					<li class="nav-item active"><a sec:authorize="hasRole('ROLE_USER')" class="nav-link" href="#">&nbsp;
 							Linea Tradicional &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item active"><a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" href="#">&nbsp;
+					<li class="nav-item active"><a sec:authorize="hasRole('ROLE_USER')" class="nav-link" href="#">&nbsp;
 							Linea Saludable &nbsp; &nbsp; &nbsp; |<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item active"><a th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and #authorization.expression('!hasRole(''ROLE_ADMIN'')')}" class="nav-link" th:href="@{/carrito}">Realizar Pedido

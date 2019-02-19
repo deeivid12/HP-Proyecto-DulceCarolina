@@ -66,6 +66,39 @@ function filtro() {
 	
 	
 }
+
+
+
+function validarFecha(){
+	
+	
+	var fecha = document.getElementById("fecEntrega").value; //fecha ingresada
+	var today = new Date();
+	var DD, MM, YYYY;
+	var tomorrow;
+	
+	DD = today.getDate() + 1; //para obtener un dia mas
+	MM = today.getMonth() + 1; //enero empieza en 0
+	YYYY = today.getFullYear(); //obtengo anio		
+	
+	if(DD<10) {
+	    DD = '0'+DD
+	} 
+
+	if(MM<10) {
+	    MM = '0'+MM
+	} 
+	
+
+	
+	tomorrow = YYYY +"-"+ MM +"-"+ DD; //fecha de mañana
+	
+	if(fecha < tomorrow) {alert("Atención: Debe ingresar una fecha al menos un día posterior al día de hoy. Gracias.");	
+						  return false}
+	else return true;
+}
+	
+	
 /*]]>*/
 </script>
 
@@ -148,8 +181,13 @@ function filtro() {
 					<div>
 						<h6 id="total" class="text-right">Total:</h6>
 					</div>
+					
+					<div>
+						<h6>Fecha entrega deseada:</h6>
+						<input id="fecEntrega" type="date"></input>
+					</div>
 
-					<input type="submit" value="Confirmar" id="confirmaCarrito"
+					<input type="button" value="Confirmar" id="confirmaCarrito"
 						class="btn btn-crear"></input>
 				</div>
 			</div>
@@ -435,75 +473,82 @@ function filtro() {
 
 		$("#confirmaCarrito").click(function(event) {
 			
-			if ($(".prod").length > 0){
-			
-			console.log($(".prod").length);
-			
-			var rta = confirm("¿Confirmar pedido?");
-			
-			if (rta != false){
+			if (validarFecha()){
 				
-			
+				if ($(".prod").length > 0){
+					
+					console.log($(".prod").length);
+					
+					var rta = confirm("¿Confirmar pedido?");
+					
+					if (rta != false){
+						
+					
 
-			var data = [];
+					var data = [];
 
-			
-			var $prods = $(".prod");
-			var $cants = $(".cant");
-			
-			console.log($prods);
+					
+					var $prods = $(".prod");
+					var $cants = $(".cant");
+					
+					console.log($prods);
 
-			for (var i = 0; i < $prods.length; i++) {
+					for (var i = 0; i < $prods.length; i++) {
 
-				var dataActual = {
-					id : $prods[i].getAttribute("idProd"),
-					cantidad : $cants[i].value
-				}
+						var dataActual = {
+							id : $prods[i].getAttribute("idProd"),
+							cantidad : $cants[i].value
+						}
 
-				data.push(dataActual);
+						data.push(dataActual);
 
-			}
-			;
-
-			console.log(data);
-
-			//envio de datos mediante AJAX
-
-			$.ajax({
-				type : "POST",
-				contentType : "application/json; charset=UTF-8",
-				url : "/carrito",
-				data : JSON.stringify(data),
-				dataType : "json",
-				success : function(data) {
-
-					if (data == "SUCCESS") {
-						alert(data);
-					} else {
-						alert(data);
 					}
+					;
 
-				}
-			// timeout: 600000,
-			//async : true,
+					console.log(data);
+					console.log(document.getElementById("fecEntrega").value);
 
-			});
+					//envio de datos mediante AJAX
 
-			event.preventDefault();
-			
-			
-			
-		  	$("#Mymodal").modal("show");
-		  		
-		  	setTimeout(function(){
-		    window.location.href = "/verPedido";
-		    }, 2500);		  		
-		  		
-			
-			} else event.preventDefault();
-			} else {
-						alert("Atención: Debe agregar uno o más productos a carrito.");
-						event.preventDefault();
+					$.ajax({
+						type : "POST",
+						contentType : "application/json; charset=UTF-8",
+						url : "/carrito",
+						data : JSON.stringify(data),
+						dataType : "json",
+						success : function(data) {
+
+							if (data == "SUCCESS") {
+								alert(data);
+							} else {
+								alert(data);
+							}
+
+						}
+					// timeout: 600000,
+					//async : true,
+
+					});
+
+					event.preventDefault();
+					
+					
+					
+				  //	$("#Mymodal").modal("show");
+				  		
+				  //	setTimeout(function(){
+				  //  window.location.href = "/verPedido";
+				   // }, 2500);		  		
+				  		
+					
+					} else event.preventDefault();
+					} else {
+								alert("Atención: Debe agregar uno o más productos a carrito.");
+								event.preventDefault();
+					}
+				
+				
+				
 			}
 
 		});

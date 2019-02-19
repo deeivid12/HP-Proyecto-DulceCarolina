@@ -1,5 +1,7 @@
 package com.example.hp.dulcecaro.app.models.entity;
 
+import java.util.Date;
+
 public class ProdAJAX {
 	
 	private int x;
@@ -7,6 +9,7 @@ public class ProdAJAX {
     
     private long id;
     private Integer cantidad;
+    private String fecha; 
 
     
     
@@ -23,7 +26,14 @@ public class ProdAJAX {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
+	
 
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 	public int getX() {
 		return x;
 	}

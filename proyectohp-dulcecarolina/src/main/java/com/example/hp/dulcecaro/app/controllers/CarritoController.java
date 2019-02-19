@@ -1,6 +1,10 @@
 package com.example.hp.dulcecaro.app.controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -114,15 +118,7 @@ public class CarritoController {
 		Usuario uActual = new Usuario();
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()); //traigo el usuario logueado
 		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1); //traigo el pedido que registre primero, para poder tener un id del mismo y asi guardar los items
-		
-		/*
-		
-		for (ProdAJAX p : prod) {
-			
-			System.out.println("ID: " + p.getId());
-			System.out.println("Cantidad" + p.getCantidad());
-			
-		} */
+		String fechaDeseada = null;
 		
 		double total = 0;
 		
@@ -136,10 +132,24 @@ public class CarritoController {
 			itemPedido.setImporte(producto.getPrecio());
 			pedido.addProductoPedido(itemPedido);
 			itemPedido.setPedido(pedido);
+			fechaDeseada = p.getFecha();
+			
 			
 			//voy calculando total
 			total = total + (p.getCantidad() * producto.getPrecio());			
 		}
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		
+		try {
+			pedido.setFecEntDeseada(dateFormat.parse(fechaDeseada));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	
 		
 		pedido.setEstado("P");//cuando se confirma, queda como pendiente!
 		pedido.setImporte(total);	

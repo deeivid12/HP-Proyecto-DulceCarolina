@@ -62,6 +62,18 @@ public class Pedido implements Serializable{
 //	@JoinColumn(name="id_ped") //importantisimo generar la llave foranea id_ped en la tabla pedidoproductos
 	private List<ItemPedido> productos;
 	
+	@Column(name="obs_ped")
+	private String observacion;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name="fecEntDeseada_ped")
+	private Date fecEntDeseada;
+	
+	public String getObservacion() {
+		return observacion;
+	}
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -88,12 +100,6 @@ public class Pedido implements Serializable{
 		//estado = "P"; //Pendiente
 	}
 	
-	@Column(name="obs_ped")
-	private String observacion;
-	
-	public String getObservacion() {
-		return observacion;
-	}
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
@@ -151,6 +157,14 @@ public class Pedido implements Serializable{
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Date getFecEntDeseada() {
+		return fecEntDeseada;
+	}
+
+	public void setFecEntDeseada(Date fecEntDeseada) {
+		this.fecEntDeseada = fecEntDeseada;
 	}
 	
 	

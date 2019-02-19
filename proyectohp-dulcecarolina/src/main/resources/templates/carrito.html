@@ -497,16 +497,17 @@ function validarFecha(){
 
 						var dataActual = {
 							id : $prods[i].getAttribute("idProd"),
-							cantidad : $cants[i].value
+							cantidad : $cants[i].value,
+							fecha: document.getElementById("fecEntrega").value.toString()
 						}
-
+						
 						data.push(dataActual);
 
 					}
-					;
+					
+				
+					
 
-					console.log(data);
-					console.log(document.getElementById("fecEntrega").value);
 
 					//envio de datos mediante AJAX
 

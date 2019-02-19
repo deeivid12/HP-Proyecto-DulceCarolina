@@ -3,13 +3,12 @@ package com.example.hp.dulcecaro.app.models.entity;
 import java.util.Date;
 
 public class ProdAJAX {
-	
-	private int x;
-    private int y;
     
     private long id;
     private Integer cantidad;
     private String fecha; 
+    private String obs;
+    private String hora;
 
     
     
@@ -34,18 +33,22 @@ public class ProdAJAX {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public int getX() {
-		return x;
+	public String getObs() {
+		return obs;
 	}
-	public void setX(int x) {
-		this.x = x;
+	public void setObs(String obs) {
+		this.obs = obs;
 	}
-	public int getY() {
-		return y;
+	public String getHora() {
+		return hora;
 	}
-	public void setY(int y) {
-		this.y = y;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
+	
+	
+
+	
     
     
 	

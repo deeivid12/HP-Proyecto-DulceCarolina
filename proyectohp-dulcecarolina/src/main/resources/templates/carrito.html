@@ -186,6 +186,15 @@ function validarFecha(){
 						<h6>Fecha entrega deseada:</h6>
 						<input id="fecEntrega" type="date"></input>
 					</div>
+					<div>
+						<h6>Hora entrega deseada:</h6>
+						<input id="horaEntrega" type="time" value="17:00" min="17:00" max="21:00" step="3600" required="true"></input>
+					</div>
+					<hr></hr>
+					<div class="form-group">
+					  <h6>Observación:</h6>
+					  <textarea class="form-control" rows="3" id="observacion"></textarea>
+					</div>
 
 					<input type="button" value="Confirmar" id="confirmaCarrito"
 						class="btn btn-crear"></input>
@@ -493,17 +502,31 @@ function validarFecha(){
 					
 					console.log($prods);
 
+					//carga de datos de lineas con items productos
 					for (var i = 0; i < $prods.length; i++) {
 
 						var dataActual = {
 							id : $prods[i].getAttribute("idProd"),
 							cantidad : $cants[i].value,
-							fecha: document.getElementById("fecEntrega").value.toString()
+							fecha: null,
+							obs : null,
+							hora : null
 						}
 						
 						data.push(dataActual);
 
 					}
+					
+					//carga de datos de fecha deseada y observaciones
+					dataActual = {
+							id : null,
+							cantidad : null,
+							fecha: document.getElementById("fecEntrega").value.toString(),
+							obs : document.getElementById("observacion").value.toString(),
+							hora : document.getElementById("horaEntrega").value.toString()
+					}
+					
+					data.push(dataActual);
 					
 				
 					
@@ -535,11 +558,11 @@ function validarFecha(){
 					
 					
 					
-				  //	$("#Mymodal").modal("show");
+				  	$("#Mymodal").modal("show");
 				  		
-				  //	setTimeout(function(){
-				  //  window.location.href = "/verPedido";
-				   // }, 2500);		  		
+				  	setTimeout(function(){
+				    window.location.href = "/verPedido";
+				    }, 2500);		  		
 				  		
 					
 					} else event.preventDefault();

@@ -108,49 +108,51 @@ public class CarritoController {
 	        produces = "application/json")
 	        //produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody String confirmaCarrito(@RequestBody List<ProdAJAX> prod) { //puede llevar @ResponseBody, si no funciona. idem con @RequestBody en ProdAJAX
-        
-		
-		//System.out.println("X: " + prod.getX()); //solo para probar que realmente se pasan datos con ajax
-		//System.out.println("Y: " + prod.getY());
-		
 		
 		Pedido pedido = new Pedido();
 		Usuario uActual = new Usuario();
 		uActual = uService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()); //traigo el usuario logueado
 		pedido = uActual.getCliente().getPedidos().get(uActual.getCliente().getPedidos().size()-1); //traigo el pedido que registre primero, para poder tener un id del mismo y asi guardar los items
 		String fechaDeseada = null;
+		String observacion = null;
+		String horaDeseada = null;
 		
 		double total = 0;
 		
 		for (ProdAJAX p : prod) {
 			
 			Producto producto = productoService.findOne(p.getId()); //busco info del producto.
-			ItemPedido itemPedido = new ItemPedido(pedido.getId(), producto.getId()); //creo item pedido con datos correspondientes a pedido y producto
-			itemPedido.setPedido(pedido);
-			itemPedido.setProducto(producto);
-			itemPedido.setCantidad(p.getCantidad());
-			itemPedido.setImporte(producto.getPrecio());
-			pedido.addProductoPedido(itemPedido);
-			itemPedido.setPedido(pedido);
-			fechaDeseada = p.getFecha();
 			
-			
-			//voy calculando total
-			total = total + (p.getCantidad() * producto.getPrecio());			
+			if (producto != null) { //valido que exista producto por cada linea
+				ItemPedido itemPedido = new ItemPedido(pedido.getId(), producto.getId()); //creo item pedido con datos correspondientes a pedido y producto
+				itemPedido.setPedido(pedido);
+				itemPedido.setProducto(producto);
+				itemPedido.setCantidad(p.getCantidad());
+				itemPedido.setImporte(producto.getPrecio());
+				pedido.addProductoPedido(itemPedido);
+				itemPedido.setPedido(pedido);
+				//voy calculando total
+				total = total + (p.getCantidad() * producto.getPrecio());	
+			}
+			if (p.getFecha() != null) fechaDeseada = p.getFecha(); //valido fecha deseada del cliente
+			if (p.getObs() != null) observacion = p.getObs();	
+			if (p.getHora() != null) horaDeseada = p.getHora();
 		}
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat hourFormat = new SimpleDateFormat("hh:mm");
 		
 		
 		try {
 			pedido.setFecEntDeseada(dateFormat.parse(fechaDeseada));
+			pedido.setHoraEntDeseada(hourFormat.parse(horaDeseada));
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
 	
-		
+		pedido.setObservacion(observacion);
 		pedido.setEstado("P");//cuando se confirma, queda como pendiente!
 		pedido.setImporte(total);	
 				

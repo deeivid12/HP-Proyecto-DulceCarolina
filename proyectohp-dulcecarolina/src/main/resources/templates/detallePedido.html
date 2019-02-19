@@ -110,22 +110,7 @@ function validarFecha(){
 			<div class="form-group row">
 					
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Estado</label>
-				<div class="col-sm-4">
-				
-					<select id="cmbBoxEstado">
-					  <option value="P">Pendiente</option>
-					  <option value="E">En espera</option>
-					  <option value="C">Confirmado</option>
-					  <option value="R">Rechazado</option>
-					</select>
-					<input id="inputEstado" type="hidden" th:field="*{estado}" class="form-control" required="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('estado')}"
-						th:errors="*{estado}"></small><span>(Estados: P, E, C, R)</span><hr></hr>
-						<span>Referencias: P-Pendiente, E-En espera, C-Confirmado, R-Rechazado)</span>
-				</div>
-			</div>
+			
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Importe</label>
@@ -133,6 +118,13 @@ function validarFecha(){
 					<input type="text" th:field="*{importe}" class="form-control" readonly="true" /> <small
 						class="form-text text-danger"
 						th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></small>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Observacion</label>
+				<div class="col-sm-4">
+					<textarea class="form-control" rows="3" th:field="*{observacion}" readonly="true" ></textarea>
 				</div>
 			</div>
 			
@@ -146,6 +138,31 @@ function validarFecha(){
 			</div>
 			
 			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Hora Entrega Deseada</label>
+				<div class="col-sm-4">
+					<input id="horaEntDeseada" type="text" th:text="*{horaEntDeseada}" class="form-control" readonly="true" />
+				</div>
+			</div>
+			
+
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Estado</label>
+				<div class="col-sm-4">
+					<select id="cmbBoxEstado">
+					  <option value="P">Pendiente</option>
+					  <option value="E">En espera</option>
+					  <option value="C">Confirmado</option>
+					  <option value="R">Rechazado</option>
+					</select>
+					<input id="inputEstado" type="hidden" th:field="*{estado}" class="form-control" required="true" /> <small
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			
+			
+			
+			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Entrega Confirmada</label>
 				<div class="col-sm-4">
 					<input id="fecEntrega" type="date" th:field="*{fecEnt}" class="form-control" /> <small
@@ -153,6 +170,7 @@ function validarFecha(){
 						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small>
 				</div>
 			</div>
+			
 			
 			
 			<div class="container">

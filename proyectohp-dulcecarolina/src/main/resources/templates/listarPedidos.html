@@ -21,7 +21,9 @@
 					<th>Estado</th>
 					<th>Importe</th>
 					<th>Fecha Entrega Deseada</th>
-					<th>Fecha Entrega</th>
+					<th>Hora Entrega Deseada</th>
+					<th>Fecha Entrega Confirmada</th>
+					<th>Hora Entrega Confirmada</th>
 					<th>Editar</th>
 					<th>Eliminar</th>
 				</tr>
@@ -36,7 +38,9 @@
 					<td th:text="${pedido.estado}"></td>
 					<td th:text="${pedido.importe}"></td>
 					<td th:text="${pedido.fecEntDeseada}"></td>
+					<td th:text="${pedido.horaEntDeseada}"></td>
 					<td th:text="${pedido.fecEnt}"></td>
+					<td th:text="${pedido.horaEnt}"></td>
 					<td><a class="btn btn-primary btn-xs" th:href="@{/pedido/detallePedido/} + ${pedido.id}"><i class="fas fa-edit"></i></a></td>
 					<td><a class="btn btn-danger btn-xs" th:href="@{/pedido/eliminarPedido/} + ${pedido.id}" onclick="return confirm('Eliminar pedido?')"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>

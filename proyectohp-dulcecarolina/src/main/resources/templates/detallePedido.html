@@ -57,54 +57,42 @@ function validarFecha(){
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.nom')}"
-						th:errors="*{cliente.nom}"></small>
+					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Apellido</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.ape}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.ape')}"
-						th:errors="*{cliente.ape}"></small>
+					<input type="text" th:field="*{cliente.ape}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Email</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.email}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.email')}"
-						th:errors="*{cliente.email}"></small>
+					<input type="text" th:field="*{cliente.email}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Telefono</label>
 				<div class="col-sm-4">
-					<input type="number" th:field="*{cliente.tel}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.tel')}"
-						th:errors="*{cliente.tel}"></small>
+					<input type="number" th:field="*{cliente.tel}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Direccion</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.dir}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.dir')}"
-						th:errors="*{cliente.dir}"></small>
+					<input type="text" th:field="*{cliente.dir}" class="form-control" readonly="true" />
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Emision</label>
 				<div class="col-sm-4">
-					<input type="date" th:field="*{fecEmi}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('fecEmi')}"
-						th:errors="*{fecEmi}"></small>
+					<input type="date" th:field="*{fecEmi}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			<div class="form-group row">
@@ -115,9 +103,7 @@ function validarFecha(){
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Importe</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{importe}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></small>
+					<input type="text" th:field="*{importe}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
@@ -131,16 +117,14 @@ function validarFecha(){
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Entrega Deseada</label>
 				<div class="col-sm-4">
-					<input type="date" th:field="*{fecEntDeseada}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('fecEntDeseada')}"
-						th:errors="*{fecEntDeseada}"></small>
+					<input type="date" th:field="*{fecEntDeseada}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Hora Entrega Deseada</label>
 				<div class="col-sm-4">
-					<input id="horaEntDeseada" type="text" th:text="*{horaEntDeseada}" class="form-control" readonly="true" />
+					<input id="horaEntDeseada" type="text" th:field="*{horaEntDeseada}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
@@ -154,6 +138,7 @@ function validarFecha(){
 					  <option value="E">En espera</option>
 					  <option value="C">Confirmado</option>
 					  <option value="R">Rechazado</option>
+					  <option value="A">Abonado</option>
 					</select>
 					<input id="inputEstado" type="hidden" th:field="*{estado}" class="form-control" required="true" /> <small
 						class="form-text text-danger"></small>
@@ -165,9 +150,14 @@ function validarFecha(){
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Entrega Confirmada</label>
 				<div class="col-sm-4">
-					<input id="fecEntrega" type="date" th:field="*{fecEnt}" class="form-control" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small>
+					<input id="fecEntrega" type="date" th:field="*{fecEnt}" class="form-control" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Hora Entrega Confirmada</label>
+				<div class="col-sm-4">
+					<input type="time" th:field="*{horaEnt}" class="form-control" min="17:00" max="21:00" step="3600" value="17:00" required="true" />
 				</div>
 			</div>
 			

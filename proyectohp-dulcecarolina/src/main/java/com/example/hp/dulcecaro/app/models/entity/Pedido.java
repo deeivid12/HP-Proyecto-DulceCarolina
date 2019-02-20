@@ -46,9 +46,9 @@ public class Pedido implements Serializable{
 	@Column(name="fec_ent_ped")
 	private Date fecEnt;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column(name="horaEnt_ped")
-	private Date horaEnt;
+	private String horaEnt;
 	
 	@Column(name="imp_ped")
 	private Double importe;
@@ -74,9 +74,9 @@ public class Pedido implements Serializable{
 	@Column(name="fecEntDeseada_ped")
 	private Date fecEntDeseada;
 	
-	@Temporal(TemporalType.TIME)
+	
 	@Column(name="horaEntDeseada_ped")
-	private Date horaEntDeseada;
+	private String horaEntDeseada;
 	
 	public String getObservacion() {
 		return observacion;
@@ -175,19 +175,19 @@ public class Pedido implements Serializable{
 		this.fecEntDeseada = fecEntDeseada;
 	}
 
-	public Date getHoraEntDeseada() {
+	public String getHoraEntDeseada() {
 		return horaEntDeseada;
 	}
 
-	public void setHoraEntDeseada(Date horaEntDeseada) {
+	public void setHoraEntDeseada(String horaEntDeseada) {
 		this.horaEntDeseada = horaEntDeseada;
 	}
 
-	public Date getHoraEnt() {
+	public String getHoraEnt() {
 		return horaEnt;
 	}
 
-	public void setHoraEnt(Date horaEnt) {
+	public void setHoraEnt(String horaEnt) {
 		this.horaEnt = horaEnt;
 	}
 	

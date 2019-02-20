@@ -145,12 +145,12 @@ public class CarritoController {
 		
 		try {
 			pedido.setFecEntDeseada(dateFormat.parse(fechaDeseada));
-			pedido.setHoraEntDeseada(hourFormat.parse(horaDeseada));
+		
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+		pedido.setHoraEntDeseada(horaDeseada);
 	
 		pedido.setObservacion(observacion);
 		pedido.setEstado("P");//cuando se confirma, queda como pendiente!

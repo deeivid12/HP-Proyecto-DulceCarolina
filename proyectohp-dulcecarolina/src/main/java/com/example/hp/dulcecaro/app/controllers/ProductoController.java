@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -97,6 +99,44 @@ public class ProductoController {
 			productoService.delete(id);
 		}
 		return "redirect:/listarProductos";		
+	}
+	
+	@RequestMapping(value="/lineaTradicional", method=RequestMethod.GET)
+	public String lineaTradicional(Model model) {
+		
+		List<Producto> productos = null;
+		List<Producto> tradicional = new ArrayList<Producto>();
+		productos = productoService.findAll();
+		if(productos != null) {
+			for(Producto p : productos) {
+				if (p.getTipo().equals("Tradicional")) tradicional.add(p);
+			}
+			model.addAttribute("productos", tradicional);
+		}
+		
+		model.addAttribute("titulo", "Productos Linea Tradicional");
+		
+	
+		return "lineatradicional";
+	}
+	
+	@RequestMapping(value="/lineaSaludable", method=RequestMethod.GET)
+	public String lineaSaludable(Model model) {
+		
+		List<Producto> productos = null;
+		List<Producto> saludable = new ArrayList<Producto>();
+		productos = productoService.findAll();
+		if(productos != null) {
+			for(Producto p : productos) {
+				if (p.getTipo().equals("Saludable")) saludable.add(p);
+			}
+			model.addAttribute("productos", saludable);
+		}
+		
+		model.addAttribute("titulo", "Productos Linea Saludable");
+		
+	
+		return "lineasaludable";
 	}
 
 }

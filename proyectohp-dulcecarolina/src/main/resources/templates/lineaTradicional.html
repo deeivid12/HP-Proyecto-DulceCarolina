@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+	<meta charset="UTF-8" />
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<h1 th:text="${titulo}"></h1>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th style="text-align:center; vertical-align: middle;">Nombre</th>
+					<th style="text-align:center; vertical-align: middle;">Descripción</th>
+					<th style="text-align:center; vertical-align: middle;">Tipo</th>
+					<th style="text-align:center; vertical-align: middle;">Porciones</th>
+					<th style="text-align:center; vertical-align: middle;">Calorías</th>
+					<th style="text-align:center; vertical-align: middle;">Carbs</th>
+					<th style="text-align:center; vertical-align: middle;">Fibras</th>
+					<th style="text-align:center; vertical-align: middle;">Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="producto: ${productos}">
+					<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail rounded" style="width:70%"
+						th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.nom}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.dsc}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.tipo}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.canPor}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.calPorPorc}*${producto.canPor}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.hdcPorPorc}*${producto.canPor}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.fibPorPorc}*${producto.canPor}"></td>
+					<td style="text-align:center; vertical-align: middle;" th:text="${producto.precio}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -46,6 +46,10 @@ public class Pedido implements Serializable{
 	@Column(name="fec_ent_ped")
 	private Date fecEnt;
 	
+	
+	@Column(name="horaEnt_ped")
+	private String horaEnt;
+	
 	@Column(name="imp_ped")
 	private Double importe;
 	
@@ -61,6 +65,22 @@ public class Pedido implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="pedido", cascade=CascadeType.ALL)
 //	@JoinColumn(name="id_ped") //importantisimo generar la llave foranea id_ped en la tabla pedidoproductos
 	private List<ItemPedido> productos;
+	
+	@Column(name="obs_ped")
+	private String observacion;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name="fecEntDeseada_ped")
+	private Date fecEntDeseada;
+	
+	
+	@Column(name="horaEntDeseada_ped")
+	private String horaEntDeseada;
+	
+	public String getObservacion() {
+		return observacion;
+	}
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -88,12 +108,6 @@ public class Pedido implements Serializable{
 		//estado = "P"; //Pendiente
 	}
 	
-	@Column(name="obs_ped")
-	private String observacion;
-	
-	public String getObservacion() {
-		return observacion;
-	}
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
@@ -152,6 +166,30 @@ public class Pedido implements Serializable{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+	public Date getFecEntDeseada() {
+		return fecEntDeseada;
+	}
+
+	public void setFecEntDeseada(Date fecEntDeseada) {
+		this.fecEntDeseada = fecEntDeseada;
+	}
+
+	public String getHoraEntDeseada() {
+		return horaEntDeseada;
+	}
+
+	public void setHoraEntDeseada(String horaEntDeseada) {
+		this.horaEntDeseada = horaEntDeseada;
+	}
+
+	public String getHoraEnt() {
+		return horaEnt;
+	}
+
+	public void setHoraEnt(String horaEnt) {
+		this.horaEnt = horaEnt;
+	}
 	
-	
+		
 }

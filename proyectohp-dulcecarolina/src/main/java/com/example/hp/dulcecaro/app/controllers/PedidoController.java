@@ -131,10 +131,10 @@ public class PedidoController {
 	@RequestMapping(value="/detallePedido", method=RequestMethod.POST)
 	public String guardar(@Valid Pedido pedido, BindingResult result, Model model, SessionStatus status) { //metodo que procesa el formulario
 		 
-		if(result.hasErrors()) {
-			model.addAttribute("titulo", "Pedido");
-			return "detallePedido";
-		}
+		//if(result.hasErrors()) {
+		//	model.addAttribute("titulo", "Pedido");
+		//	return "detallePedido";
+		//}
 		
 		pedidoService.savePedido(pedido);
 		status.setComplete(); //con esto se elimina el objeto mPrima de la sesion.

@@ -6,35 +6,41 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<h1 th:text="${titulo}"></h1>
+		<h1>Listado de Pedidos</h1>
 		<p>
 			
 		</p>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Apellido</th>
-					<th>Email</th>
-					<th>Fecha Emisión</th>
-					<th>Estado</th>
-					<th>Importe</th>
-					<th>Fecha Entrega</th>
-					<th>Editar</th>
-					<th>Eliminar</th>
+					<th style="text-align:center; vertical-align: middle" >ID</th>
+					<th style="text-align:center; vertical-align: middle" >Nombre</th>
+					<th style="text-align:center; vertical-align: middle" >Apellido</th>
+					<th style="text-align:center; vertical-align: middle" >Email</th>
+					<th style="text-align:center; vertical-align: middle" >Fecha Emisión</th>
+					<th style="text-align:center; vertical-align: middle" >Estado</th>
+					<th style="text-align:center; vertical-align: middle" >Importe</th>
+					<th style="text-align:center; vertical-align: middle" >Fecha Entrega Deseada</th>
+					<th style="text-align:center; vertical-align: middle" >Hora Entrega Deseada</th>
+					<th style="text-align:center; vertical-align: middle" >Fecha Entrega Confirmada</th>
+					<th style="text-align:center; vertical-align: middle" >Hora Entrega Confirmada</th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="pedido: ${pedidos}">
-					<td th:text="${pedido.id}"></td>
-					<td th:text="${pedido.cliente.nom}"></td>
-					<td th:text="${pedido.cliente.ape}"></td>
-					<td th:text="${pedido.cliente.email}"></td>
-					<td th:text="${pedido.fecEmi}"></td>
-					<td th:text="${pedido.estado}"></td>
-					<td th:text="${pedido.importe}"></td>
-					<td th:text="${pedido.fecEnt}"></td>
+					<td style="text-align:center" th:text="${pedido.id}"></td>
+					<td style="text-align:center" th:text="${pedido.cliente.nom}"></td>
+					<td style="text-align:center" th:text="${pedido.cliente.ape}"></td>
+					<td style="text-align:center" th:text="${pedido.cliente.email}"></td>
+					<td style="text-align:center; width:10%;" th:text="${pedido.fecEmi}"></td>
+					<td style="text-align:center" th:text="${pedido.estado}"></td>
+					<td style="text-align:center" th:text="${pedido.importe}"></td>
+					<td style="text-align:center; width:10%;" th:text="${pedido.fecEntDeseada}"></td>
+					<td style="text-align:center" th:text="${pedido.horaEntDeseada}"></td>
+					<td style="text-align:center" th:text="${pedido.fecEnt}"></td>
+					<td style="text-align:center" th:text="${pedido.horaEnt}"></td>
 					<td><a class="btn btn-primary btn-xs" th:href="@{/pedido/detallePedido/} + ${pedido.id}"><i class="fas fa-edit"></i></a></td>
 					<td><a class="btn btn-danger btn-xs" th:href="@{/pedido/eliminarPedido/} + ${pedido.id}" onclick="return confirm('Eliminar pedido?')"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>

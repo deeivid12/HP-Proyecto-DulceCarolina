@@ -66,6 +66,39 @@ function filtro() {
 	
 	
 }
+
+
+
+function validarFecha(){
+	
+	
+	var fecha = document.getElementById("fecEntrega").value; //fecha ingresada
+	var today = new Date();
+	var DD, MM, YYYY;
+	var tomorrow;
+	
+	DD = today.getDate() + 1; //para obtener un dia mas
+	MM = today.getMonth() + 1; //enero empieza en 0
+	YYYY = today.getFullYear(); //obtengo anio		
+	
+	if(DD<10) {
+	    DD = '0'+DD
+	} 
+
+	if(MM<10) {
+	    MM = '0'+MM
+	} 
+	
+
+	
+	tomorrow = YYYY +"-"+ MM +"-"+ DD; //fecha de mañana
+	
+	if(fecha < tomorrow) {alert("Atención: Debe ingresar una fecha al menos un día posterior al día de hoy. Gracias.");	
+						  return false}
+	else return true;
+}
+	
+	
 /*]]>*/
 </script>
 
@@ -76,7 +109,7 @@ function filtro() {
 	<form th:action="@{/carrito}" id="form" method="post">
 
 		<div class="container-fluid">
-		
+		<hr style="opacity:0"></hr>
 		<div class="row">
 			<div class="col-3">
 				<input type="text" id="myInput" onkeyup="busqueda()" placeholder="Buscar por nombre.."></input>
@@ -97,30 +130,30 @@ function filtro() {
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th class="col-2"></th>
-								<th class="col-1">Nombre</th>
-								<th class="col-1">Tipo</th>
-								<th class="col-2">Descripcion</th>
-								<th class="col-1">Porciones</th>
-								<th class="col-1">Calorías</th>
-								<th class="col-1">Carbs</th>
-								<th class="col-1">Fibras</th>
-								<th class="col-1">Precio ($)</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-2"></th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Nombre</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Tipo</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-2">Descripcion</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Porciones</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Calorías</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Carbs</th>
+								<th style="text-align:center; vertical-align: middle;" class="col-1">Fibras</th>
+								<th style="text-align:center; vertical-align: middle; width:20%" class="col-1">Precio ($)</th>
 								<th class="col-1"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="producto: ${productos}" th:attr="idProd=${producto.id}, nomProd=${producto.nom}, tipoProd=${producto.tipo}">
-								<td><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail img-rounded img-responsive" style="width: 70%;"
+								<td style="text-align:center"><img th:if="${#strings.length(producto.imagen) > 0}" class="img-thumbnail img-rounded img-responsive" style="width:90%;"
 									th:src="@{'/uploads/' + ${producto.imagen}}"></img></td>
-								<td th:text="${producto.nom}"></td>
-								<td th:text="${producto.tipo}" id="tipo"></td>
-								<td th:text="${producto.dsc}"></td>
-								<td th:text="${producto.canPor}"></td>
-								<td th:text="${producto.calPorPorc} * ${producto.canPor}"></td>
-								<td th:text="${producto.hdcPorPorc} * ${producto.canPor}"></td>
-								<td th:text="${producto.fibPorPorc} * ${producto.canPor}"></td>
-								<td th:text="${producto.precio}"></td>
+								<td style="text-align:center" th:text="${producto.nom}"></td>
+								<td style="text-align:center" th:text="${producto.tipo}" id="tipo"></td>
+								<td style="text-align:center" th:text="${producto.dsc}"></td>
+								<td style="text-align:center" th:text="${producto.canPor}"></td>
+								<td style="text-align:center" th:text="${producto.calPorPorc} * ${producto.canPor}"></td>
+								<td style="text-align:center" th:text="${producto.hdcPorPorc} * ${producto.canPor}"></td>
+								<td style="text-align:center" th:text="${producto.fibPorPorc} * ${producto.canPor}"></td>
+								<td style="text-align:center" th:text="${producto.precio}"></td>
 								<td><button type="button"
 										class="addButton btn btn-xs" 
 										th:id="${producto.id}" th:name="${producto.nom}" th:attr="precio=${producto.precio}, idprod=${producto.id}"><i class="fas fa-plus"></i></button></td>
@@ -148,8 +181,23 @@ function filtro() {
 					<div>
 						<h6 id="total" class="text-right">Total:</h6>
 					</div>
+					
+					<div>
+						<h6>Fecha entrega deseada:</h6>
+						<input id="fecEntrega" type="date"></input>
+					</div>
+					<hr style="opacity:0"></hr>
+					<div>
+						<h6>Hora entrega deseada:</h6>
+						<input id="horaEntrega" type="time" value="17:00" min="17:00" max="21:00" step="3600" required="true"></input>
+					</div>
+					<hr style="opacity:0"></hr>
+					<div class="form-group">
+					  <h6>Observación:</h6>
+					  <textarea class="form-control" rows="3" id="observacion"></textarea>
+					</div>
 
-					<input type="submit" value="Confirmar" id="confirmaCarrito"
+					<input type="button" value="Confirmar" id="confirmaCarrito"
 						class="btn btn-crear"></input>
 				</div>
 			</div>
@@ -435,75 +483,97 @@ function filtro() {
 
 		$("#confirmaCarrito").click(function(event) {
 			
-			if ($(".prod").length > 0){
-			
-			console.log($(".prod").length);
-			
-			var rta = confirm("¿Confirmar pedido?");
-			
-			if (rta != false){
+			if (validarFecha()){
 				
-			
+				if ($(".prod").length > 0){
+					
+					console.log($(".prod").length);
+					
+					var rta = confirm("¿Confirmar pedido?");
+					
+					if (rta != false){
+						
+					
 
-			var data = [];
+					var data = [];
 
-			
-			var $prods = $(".prod");
-			var $cants = $(".cant");
-			
-			console.log($prods);
+					
+					var $prods = $(".prod");
+					var $cants = $(".cant");
+					
+					console.log($prods);
 
-			for (var i = 0; i < $prods.length; i++) {
+					//carga de datos de lineas con items productos
+					for (var i = 0; i < $prods.length; i++) {
 
-				var dataActual = {
-					id : $prods[i].getAttribute("idProd"),
-					cantidad : $cants[i].value
-				}
+						var dataActual = {
+							id : $prods[i].getAttribute("idProd"),
+							cantidad : $cants[i].value,
+							fecha: null,
+							obs : null,
+							hora : null
+						}
+						
+						data.push(dataActual);
 
-				data.push(dataActual);
-
-			}
-			;
-
-			console.log(data);
-
-			//envio de datos mediante AJAX
-
-			$.ajax({
-				type : "POST",
-				contentType : "application/json; charset=UTF-8",
-				url : "/carrito",
-				data : JSON.stringify(data),
-				dataType : "json",
-				success : function(data) {
-
-					if (data == "SUCCESS") {
-						alert(data);
-					} else {
-						alert(data);
 					}
+					
+					//carga de datos de fecha deseada y observaciones
+					dataActual = {
+							id : null,
+							cantidad : null,
+							fecha: document.getElementById("fecEntrega").value.toString(),
+							obs : document.getElementById("observacion").value.toString(),
+							hora : document.getElementById("horaEntrega").value.toString()
+					}
+					
+					data.push(dataActual);
+					
+				
+					
 
-				}
-			// timeout: 600000,
-			//async : true,
 
-			});
+					//envio de datos mediante AJAX
 
-			event.preventDefault();
-			
-			
-			
-		  	$("#Mymodal").modal("show");
-		  		
-		  	setTimeout(function(){
-		    window.location.href = "/verPedido";
-		    }, 2500);		  		
-		  		
-			
-			} else event.preventDefault();
-			} else {
-						alert("Atención: Debe agregar uno o más productos a carrito.");
-						event.preventDefault();
+					$.ajax({
+						type : "POST",
+						contentType : "application/json; charset=UTF-8",
+						url : "/carrito",
+						data : JSON.stringify(data),
+						dataType : "json",
+						success : function(data) {
+
+							if (data == "SUCCESS") {
+								alert(data);
+							} else {
+								alert(data);
+							}
+
+						}
+					// timeout: 600000,
+					//async : true,
+
+					});
+
+					event.preventDefault();
+					
+					
+					
+				  	$("#Mymodal").modal("show");
+				  		
+				  	setTimeout(function(){
+				    window.location.href = "/verPedido";
+				    }, 2500);		  		
+				  		
+					
+					} else event.preventDefault();
+					} else {
+								alert("Atención: Debe agregar uno o más productos a carrito.");
+								event.preventDefault();
+					}
+				
+				
+				
 			}
 
 		});

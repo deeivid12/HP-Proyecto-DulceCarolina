@@ -4,6 +4,45 @@
 <meta charset="UTF-8" />
 </head>
 <body>
+<script>
+/*<![CDATA[*/
+function validarFecha(){
+	
+		var fecha = document.getElementById("fecEntrega").value; //fecha ingresada
+		var today = new Date();
+		var dia, mes, anio;
+		var DD, MM, YYYY;
+		var tomorrow;
+		
+		DD = today.getDate() + 1; //para obtener un dia mas
+		MM = today.getMonth() + 1; //enero empieza en 0
+		YYYY = today.getFullYear(); //obtengo anio		
+		
+		if(DD<10) {
+		    DD = '0'+DD
+		} 
+
+		if(MM<10) {
+		    MM = '0'+MM
+		} 
+		
+
+		
+		tomorrow = YYYY +"-"+ MM +"-"+ DD; //fecha de mañana
+		
+		if(fecha < tomorrow) alert("Atención: Debe ingresar una fecha al menos un día posterior al día de hoy. Gracias.")
+		else {
+			document.getElementById("formDetallePedido").submit();
+		}
+		
+		
+	};
+	
+
+	/*]]>*/
+</script>
+
+
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<p></p>
@@ -12,90 +51,116 @@
 		<h2 th:text="${titulo}"></h2>
 		<p></p>
 
-		<form th:action="@{/pedido/detallePedido}"  th:object="${pedido}"
+		<form th:action="@{/pedido/detallePedido}"  th:object="${pedido}" id="formDetallePedido"
 			method="post">
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.nom')}"
-						th:errors="*{cliente.nom}"></small>
+					<input type="text" th:field="*{cliente.nom}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Apellido</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.ape}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.ape')}"
-						th:errors="*{cliente.ape}"></small>
+					<input type="text" th:field="*{cliente.ape}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Email</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.email}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.email')}"
-						th:errors="*{cliente.email}"></small>
+					<input type="text" th:field="*{cliente.email}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Telefono</label>
 				<div class="col-sm-4">
-					<input type="number" th:field="*{cliente.tel}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.tel')}"
-						th:errors="*{cliente.tel}"></small>
+					<input type="number" th:field="*{cliente.tel}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Direccion</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{cliente.dir}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('cliente.dir')}"
-						th:errors="*{cliente.dir}"></small>
+					<input type="text" th:field="*{cliente.dir}" class="form-control" readonly="true" />
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Fecha Emision</label>
 				<div class="col-sm-4">
-					<input type="date" th:field="*{fecEmi}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('fecEmi')}"
-						th:errors="*{fecEmi}"></small>
+					<input type="date" th:field="*{fecEmi}" class="form-control" readonly="true" />
 				</div>
 			</div>
-
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Estado</label>
-				<div class="col-sm-4">
-					<input type="text" th:field="*{estado}" class="form-control" required="true" /> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('estado')}"
-						th:errors="*{estado}"></small><span>(Estados: P, E, C, R)</span><hr></hr>
-						<span>Referencias: P-Pendiente, E-En espera, C-Confirmado, R-Rechazado)</span>
-				</div>
+					
 			</div>
+			
 
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Importe</label>
 				<div class="col-sm-4">
-					<input type="text" th:field="*{importe}" class="form-control" readonly="true" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('importe')}" th:errors="*{importe}"></small>
+					<input type="text" th:field="*{importe}" class="form-control" readonly="true" />
 				</div>
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Fecha Entrega</label>
+				<label class="col-sm-2 col-form-label">Observacion</label>
 				<div class="col-sm-4">
-					<input type="date" th:field="*{fecEnt}" class="form-control" /> <small
-						class="form-text text-danger"
-						th:if="${#fields.hasErrors('fecEnt')}" th:errors="*{fecEnt}"></small>
+					<textarea class="form-control" rows="3" th:field="*{observacion}" readonly="true" ></textarea>
 				</div>
 			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Fecha Entrega Deseada</label>
+				<div class="col-sm-4">
+					<input type="date" th:field="*{fecEntDeseada}" class="form-control" readonly="true" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Hora Entrega Deseada</label>
+				<div class="col-sm-4">
+					<input id="horaEntDeseada" type="text" th:field="*{horaEntDeseada}" class="form-control" readonly="true" />
+				</div>
+			</div>
+			
+
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Estado</label>
+				<div class="col-sm-4">
+					<select id="cmbBoxEstado">
+					  <option value="P">Pendiente</option>
+					  <option value="E">En espera</option>
+					  <option value="C">Confirmado</option>
+					  <option value="R">Rechazado</option>
+					  <option value="A">Abonado</option>
+					</select>
+					<input id="inputEstado" type="hidden" th:field="*{estado}" class="form-control" required="true" /> <small
+						class="form-text text-danger"></small>
+				</div>
+			</div>
+			
+			
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Fecha Entrega Confirmada</label>
+				<div class="col-sm-4">
+					<input id="fecEntrega" type="date" th:field="*{fecEnt}" class="form-control" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Hora Entrega Confirmada</label>
+				<div class="col-sm-4">
+					<input type="time" th:field="*{horaEnt}" class="form-control" min="17:00" max="21:00" step="3600" value="17:00" required="true" />
+				</div>
+			</div>
+			
 			
 			
 			<div class="container">
@@ -142,7 +207,7 @@
 					<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
 					<div class="col-sm-5 text-center">
-						<input type="submit" value="Confirmar" class="btn btn-crear" />
+						<input id="btnConfirmar" type="button" value="Confirmar" class="btn btn-crear" onclick="validarFecha()" />
 					</div>
 				</div>
 					
@@ -156,4 +221,43 @@
 	</div>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
+<script>
+/*<![CDATA[*/
+
+$(document).ready(function() {
+	
+		//CARGO EN COMBO EL VALOR QUE SE TRAE DE BASE DE DATOS.
+		var valor = $("#inputEstado").val().toString();
+		var $opciones = $("#cmbBoxEstado option");
+		
+		for(var i = 0; i< $opciones.length; i++){
+				
+			if ($opciones[i].value.toString() == valor) $opciones[i].setAttribute("selected", "selected");
+		};
+
+		//VALIDO DIA DE HOY Y MAÑANA
+		
+		
+		
+		
+
+		
+		
+		//OPCIONES COMBOBOX
+		$("#cmbBoxEstado").change(function(){
+			
+			console.log($("#inputEstado"));
+			
+			
+			var seleccion = $("#cmbBoxEstado :selected").val();
+			
+			
+			$("#inputEstado").val(seleccion);
+		
+		
+		});
+	
+	});
+/*]]>*/
+</script>
 </html>
